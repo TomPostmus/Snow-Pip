@@ -18,3 +18,4 @@ if (!external_input) {
 	var sensitivity = 1
 	pip.rotation -= disp_x * sensitivity			// update pip rotation
 }
+show_debug_message(test_extension())

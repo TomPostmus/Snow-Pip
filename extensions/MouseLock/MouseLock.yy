@@ -18,10 +18,12 @@
   "exportToGame": true,
   "extensionVersion": "0.0.1",
   "files": [
-    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"","constants":[],"copyToTargets":17179869216,"filename":"MouseLock.js","final":"","functions":[],"init":"","kind":5,"order":[],"origname":"","ProxyFiles":[],"uncompress":false,"usesRunnerInterface":false,},
+    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"","constants":[],"copyToTargets":32,"filename":"MouseLock.js","final":"","functions":[
+        {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"test_extension","argCount":0,"args":[],"documentation":"","externalName":"test","help":"","hidden":false,"kind":5,"returnType":1,},
+      ],"init":"","kind":5,"order":[],"origname":"","ProxyFiles":[],"uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject": "",
-  "hasConvertedCodeInjection": false,
+  "hasConvertedCodeInjection": true,
   "helpfile": "",
   "HTML5CodeInjection": "",
   "html5Props": false,
