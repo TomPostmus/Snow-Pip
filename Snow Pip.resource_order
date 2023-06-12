@@ -7,8 +7,10 @@
   "ResourceOrderSettings": [
     {"name":"spr_pip_collision","order":2,"path":"sprites/spr_pip_collision/spr_pip_collision.yy",},
     {"name":"obj_pip_collision","order":12,"path":"objects/obj_pip_collision/obj_pip_collision.yy",},
+    {"name":"MouseLock","order":17,"path":"extensions/MouseLock/MouseLock.yy",},
     {"name":"obj_wall_collision","order":13,"path":"objects/obj_wall_collision/obj_wall_collision.yy",},
     {"name":"obj_pip","order":14,"path":"objects/obj_pip/obj_pip.yy",},
+    {"name":"obj_input","order":16,"path":"objects/obj_input/obj_input.yy",},
     {"name":"spr_pip_trunk","order":1,"path":"sprites/spr_pip_trunk/spr_pip_trunk.yy",},
     {"name":"obj_camera","order":15,"path":"objects/obj_camera/obj_camera.yy",},
     {"name":"spr_wall_collision","order":3,"path":"sprites/spr_wall_collision/spr_wall_collision.yy",},
