@@ -3,7 +3,6 @@ camera_set_view_pos(view_camera[0],
 	x - width / 2,		// set at top left corner
 	y - height / 2)
 	
-
 // Bounding at room bounds
 var target_x = clamp(target.x, width / 2, room_width - width / 2)
 var target_y = clamp(target.y, height / 2, room_width - height / 2)
