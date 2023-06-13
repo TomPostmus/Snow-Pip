@@ -1,1 +1,1 @@
-// See obj_draw_pips
+// See obj_draw_pips for actual drawing

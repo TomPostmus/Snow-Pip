@@ -1,4 +1,6 @@
 collision = instance_create_layer(x, y, "Instances", obj_pip_collision)
+hmask_head = instance_create_layer(x, y, "Instances", obj_pip_hmask_head)
+hmask_trunk = instance_create_layer(x, y, "Instances", obj_pip_hmask_trunk)
 
 // Animation vars
 rotation = 0 // facing rotation of pip
