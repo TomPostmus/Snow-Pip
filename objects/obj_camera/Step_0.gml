@@ -1,11 +1,14 @@
-// Follow target
-var corner_x = target.x - camera_get_view_width(view_camera[0]) / 2 // target location (at top-left corner)
-var corner_y = target.y - camera_get_view_height(view_camera[0]) / 2
-var camera_x = camera_get_view_x(view_camera[0])
-var camera_y = camera_get_view_y(view_camera[0])
+// Set view at camera location
+camera_set_view_pos(view_camera[0],
+	x - width / 2,		// set at top left corner
+	y - height / 2)
+	
 
+// Bounding at room bounds
+var target_x = clamp(target.x, width / 2, room_width - width / 2)
+var target_y = clamp(target.y, height / 2, room_width - height / 2)
+	
 // Smooth following (P-controller)
 var p = 0.1
-var next_x = camera_x + (corner_x - camera_x) * p
-var next_y = camera_y + (corner_y - camera_y) * p
-camera_set_view_pos(view_camera[0], next_x, next_y)
+x += (target_x - x) * p
+y += (target_y - y) * p

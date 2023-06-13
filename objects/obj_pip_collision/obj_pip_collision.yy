@@ -8,8 +8,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Snow Pip",
-    "path": "Snow Pip.yyp",
+    "name": "Pip",
+    "path": "folders/Pip.yy",
   },
   "parentObjectId": null,
   "persistent": false,
