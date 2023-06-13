@@ -12,10 +12,10 @@ if (!external_input) {
 		lengthdir_y(lateral, pip.rotation + 90)
 		
 	// Mouse turning movement
-	var disp_x = window_mouse_get_x() - mouse_prev_x	// x displacement of mouse
-	mouse_prev_x = window_mouse_get_x()
+	var disp_x = window_mouse_get_x() - window_get_width()/2	// x displacement of mouse
+	window_mouse_set(window_get_width()/2, window_get_height()/2)
+	window_set_cursor(cr_none)
 	
 	var sensitivity = 1
 	pip.rotation -= disp_x * sensitivity			// update pip rotation
 }
-show_debug_message(test_extension())
