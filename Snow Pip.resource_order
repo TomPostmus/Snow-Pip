@@ -4,6 +4,7 @@
     {"name":"Rooms","order":10,"path":"folders/Rooms.yy",},
     {"name":"Sprites","order":11,"path":"folders/Sprites.yy",},
     {"name":"wall","order":4,"path":"folders/Sprites/wall.yy",},
+    {"name":"pip_arm","order":11,"path":"folders/Sprites/pip_arm.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"spr_pip_hmask_trunk","order":8,"path":"sprites/spr_pip_hmask_trunk/spr_pip_hmask_trunk.yy",},
@@ -15,6 +16,7 @@
     {"name":"obj_wall_collision","order":13,"path":"objects/obj_wall_collision/obj_wall_collision.yy",},
     {"name":"obj_pip","order":1,"path":"objects/obj_pip/obj_pip.yy",},
     {"name":"obj_pip_hmask_trunk","order":5,"path":"objects/obj_pip_hmask_trunk/obj_pip_hmask_trunk.yy",},
+    {"name":"spr_pip_arm_brace","order":1,"path":"sprites/spr_pip_arm_brace/spr_pip_arm_brace.yy",},
     {"name":"obj_input","order":2,"path":"objects/obj_input/obj_input.yy",},
     {"name":"spr_pip_trunk","order":1,"path":"sprites/spr_pip_trunk/spr_pip_trunk.yy",},
     {"name":"spr_camera","order":5,"path":"sprites/spr_camera/spr_camera.yy",},

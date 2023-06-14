@@ -33,3 +33,16 @@ function draw_heads() {
 		}
 	}
 }
+
+// Draw arms of each pip
+function draw_arms() {
+	for (var i = 0; i < instance_number(obj_pip); i++) {
+		var pip = instance_find(obj_pip, i)
+		
+		var arm_x = pip.collision.x + lengthdir_x(8, pip.rotation)
+		var arm_y = pip.collision.y + lengthdir_y(8, pip.rotation)
+		
+		draw_sprite_ext(pip.arm_spr, pip.arm_index,
+			arm_x, arm_y, 1, 1, pip.rotation, c_white, 1)
+	}
+}
