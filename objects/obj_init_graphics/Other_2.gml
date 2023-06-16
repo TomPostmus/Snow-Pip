@@ -1,5 +1,5 @@
 // Set full screen
-full_screen = true
+full_screen = false
 window_set_fullscreen(full_screen)
 
 // Resize application surface to screen/window dimensions
