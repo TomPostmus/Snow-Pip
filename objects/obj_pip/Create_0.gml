@@ -31,7 +31,7 @@ function throw_projectile(type) {
 		"Instances", obj_snowball)
 	snowball.image_angle = rotation
 		
-	var throw_speed = 10
+	var throw_speed = 8
 	snowball.speed_x = lengthdir_x(throw_speed, rotation)
 	snowball.speed_y = lengthdir_y(throw_speed, rotation)
 	snowball.own_pip = self
