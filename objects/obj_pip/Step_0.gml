@@ -26,9 +26,15 @@ if (arm_state == "hold") {
 	arm_index += t
 	
 	if (arm_index > sprite_get_number(arm_spr)-t) {
+		arm_state = "empty"
+		arm_spr = undefined // no sprite
+		arm_index = 0
+	}
+} else if (arm_state == "empty") {
+	if (input_mb_left_press) {
 		arm_state = "pickup"
 		arm_spr = spr_pip_arm_pickup
-		arm_index = 0
+		arm_index = 0		
 	}
 } else if (arm_state == "pickup") {
 	var t = 0.5
@@ -40,3 +46,6 @@ if (arm_state == "hold") {
 		arm_index = 0
 	}
 }
+
+// Update item pos in hand
+update_item_pos()

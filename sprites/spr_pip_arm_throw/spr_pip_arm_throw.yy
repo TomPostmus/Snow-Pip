@@ -2,7 +2,7 @@
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
   "name": "spr_pip_arm_throw",
-  "bbox_bottom": 35,
+  "bbox_bottom": 34,
   "bbox_left": 8,
   "bbox_right": 25,
   "bbox_top": 14,

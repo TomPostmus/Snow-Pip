@@ -42,7 +42,23 @@ function draw_arms() {
 		var arm_x = pip.collision.x + lengthdir_x(8, pip.rotation)
 		var arm_y = pip.collision.y + lengthdir_y(8, pip.rotation)
 		
-		draw_sprite_ext(pip.arm_spr, pip.arm_index,
-			arm_x, arm_y, 1, 1, pip.rotation, c_white, 1)
+		// Draw item in hand
+		if (pip.item_x != undefined && pip.item_y != undefined) {
+			var item_abs_x = arm_x
+				+ lengthdir_x(pip.item_x, pip.rotation)
+				+ lengthdir_x(pip.item_y, pip.rotation - 90)
+			var item_abs_y = arm_y
+				+ lengthdir_y(pip.item_x, pip.rotation)
+				+ lengthdir_y(pip.item_y, pip.rotation - 90)
+			draw_sprite_ext(spr_snowball, 0,
+				item_abs_x, item_abs_y, 1, 1,
+				pip.rotation, c_white, 1)
+		}
+		
+		// Draw arms
+		if (pip.arm_spr != undefined) {
+			draw_sprite_ext(pip.arm_spr, pip.arm_index,
+				arm_x, arm_y, 1, 1, pip.rotation, c_white, 1)
+		}
 	}
 }

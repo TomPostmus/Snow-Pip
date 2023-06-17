@@ -38,7 +38,6 @@
     {"id":{"name":"obj_draw_pips","path":"objects/obj_draw_pips/obj_draw_pips.yy",},},
     {"id":{"name":"obj_pip_hmask_trunk","path":"objects/obj_pip_hmask_trunk/obj_pip_hmask_trunk.yy",},},
     {"id":{"name":"spr_pip_arm_brace","path":"sprites/spr_pip_arm_brace/spr_pip_arm_brace.yy",},},
-    {"id":{"name":"spr_pip_arm_brace12","path":"sprites/spr_pip_arm_brace12/spr_pip_arm_brace12.yy",},},
     {"id":{"name":"spr_pip_arm_throw","path":"sprites/spr_pip_arm_throw/spr_pip_arm_throw.yy",},},
     {"id":{"name":"obj_input","path":"objects/obj_input/obj_input.yy",},},
     {"id":{"name":"spr_pip_arm_hold","path":"sprites/spr_pip_arm_hold/spr_pip_arm_hold.yy",},},
