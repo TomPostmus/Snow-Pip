@@ -22,7 +22,7 @@ if (arm_state == "hold") {
 		throw_projectile("snowball")
 	}
 } else if (arm_state == "throw") {
-	var t = 0.5
+	var t = 0.7
 	arm_index += t
 	
 	if (arm_index > sprite_get_number(arm_spr)-t) {

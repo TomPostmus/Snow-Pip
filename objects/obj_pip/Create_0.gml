@@ -12,8 +12,8 @@ item_x = undefined				// relative position of holding item
 item_y = undefined				// undefined means holding nothing
 
 // Input vars for animation
-input_lateral = 0
 input_axial = 0
+input_lateral = 0
 input_mb_left = 0 // hold left
 input_mb_left_press = 0
 input_mb_left_release = 0

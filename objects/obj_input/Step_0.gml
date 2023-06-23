@@ -2,13 +2,14 @@
 if (!external_input) {
 	// Move input
 	var lateral = keyboard_check(ord("A")) - keyboard_check(ord("D"))
-	var axial = keyboard_check(ord("W")) - keyboard_check(ord("S"))
+	var forward = keyboard_check(ord("W"))
+	var backward = keyboard_check(ord("S"))
 	
+	pip.input_axial = forward - backward
 	pip.input_lateral = lateral
-	pip.input_axial = axial
 	
 	// Move pip
-	var disp_axial = axial * 1.7		// displacement
+	var disp_axial = forward * 1.7 - backward * 1.2 // displacement
 	var disp_lateral = lateral * 0.8
 	pip.collision.phy_position_x += 
 		lengthdir_x(disp_axial, pip.rotation) +
