@@ -5,7 +5,7 @@ camera_set_view_pos(view_camera[0],
 	
 // Bounding at room bounds
 var target_x = clamp(target.x, width / 2, room_width - width / 2)
-var target_y = clamp(target.y, height / 2, room_width - height / 2)
+var target_y = clamp(target.y, height / 2, room_height - height / 2)
 	
 // Smooth following (P-controller)
 var p = 0.1

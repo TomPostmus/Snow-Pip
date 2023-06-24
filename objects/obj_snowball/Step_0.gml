@@ -10,6 +10,6 @@ var hit = (wall != noone)
 	|| (trunk != noone && trunk != own_pip.hmask_trunk)
 
 if (hit) {
-	pulverise_effect()
+	instance_create_layer(x, y, "Instances", obj_snowball_pulverise)
 	instance_destroy()
 }

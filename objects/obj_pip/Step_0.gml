@@ -9,17 +9,20 @@ if (arm_state == "hold") {
 	if (input_mb_left_press) {
 		arm_state = "brace"
 		arm_spr = spr_pip_arm_brace
+		throw_strength = 0 // reset throw strength
 	}
-} if (arm_state == "brace") { // no elseif for immediate response
-	arm_index += 0.1 // slowly advance animation
-	arm_index = min(arm_index, sprite_get_number(arm_spr)-1) // cap at max frame
+} if (arm_state == "brace") {					// no elseif for immediate response
+	throw_strength += 0.02						// increase throw strength
+	throw_strength = min(throw_strength, 1)		// cap at 1
+	
+	arm_index = throw_strength * 3
 	
 	if (input_mb_left_release) {
 		arm_state = "throw"
 		arm_spr = spr_pip_arm_throw
 		arm_index = 0
 		
-		throw_projectile("snowball")
+		throw_projectile()
 	}
 } else if (arm_state == "throw") {
 	var t = 0.7

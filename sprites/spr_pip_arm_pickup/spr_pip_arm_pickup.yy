@@ -30,7 +30,7 @@
   "origin": 9,
   "parent": {
     "name": "pip_arm",
-    "path": "folders/Sprites/pip_arm.yy",
+    "path": "folders/Sprites/pip/pip_arm.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {
