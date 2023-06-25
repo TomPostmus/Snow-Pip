@@ -8,6 +8,14 @@ for (var i = 0; i < ds_list_size(parts); i ++) {
 	prt.alpha += prt.speed_alpha
 }
 
+// Slow down big parts
+for (var i = 0; i < ds_list_size(parts); i ++) {
+	var bprt = parts[|i]
+	
+	bprt.speed_x *= 0.8
+	bprt.speed_y *= 0.8
+}
+
 // Cloud alpha
 if (cloud_appear) {
 	cloud.speed_alpha = 0.05 // cloud becomes stronger

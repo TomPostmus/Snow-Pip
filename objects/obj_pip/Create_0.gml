@@ -1,6 +1,8 @@
 collision = instance_create_layer(x, y, "Instances", obj_pip_collision)
 hmask_head = instance_create_layer(x, y, "Instances", obj_pip_hmask_head)
+hmask_head.pip = self
 hmask_trunk = instance_create_layer(x, y, "Instances", obj_pip_hmask_trunk)
+hmask_trunk.pip = self
 
 // Animation vars
 rotation = 0					// facing rotation of pip
@@ -18,9 +20,12 @@ input_lateral = 0
 input_mb_left = 0 // hold left
 input_mb_left_press = 0
 input_mb_left_release = 0
+input_mb_right = 0 // hold right
+input_mb_right_press = 0
+input_mb_right_release = 0
 
 // Create projectile inst
-function throw_projectile() {
+function throw_projectile(spin) {
 	var arm_x = collision.x + lengthdir_x(8, rotation)
 	var arm_y = collision.y + lengthdir_y(8, rotation)
 	var item_abs_x = arm_x
@@ -37,6 +42,7 @@ function throw_projectile() {
 	snowball.speed_x = lengthdir_x(throw_speed, rotation)
 	snowball.speed_y = lengthdir_y(throw_speed, rotation)
 	snowball.own_pip = self
+	snowball.spin = spin
 }
 
 // Set position of item based on current sprite
@@ -63,6 +69,7 @@ function update_item_pos() {
 			}
 		break
 		case spr_pip_arm_throw:		
+		case spr_pip_arm_throw_spin:		
 			var index = floor(arm_index)
 			switch(index) {
 				case 0:

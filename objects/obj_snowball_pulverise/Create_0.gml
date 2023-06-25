@@ -28,32 +28,34 @@ cloud_appear = true
 
 // Big parts
 var off = irandom(90)
+big_parts = ds_list_create()
 for (var i = 0; i < 4; i ++) {
 	var angle = off + i * 90
 	var prt = new part(
 		choose(spr_snowball_part_big1,
 			   spr_snowball_part_big2),
-		lengthdir_x(1.5, angle),
-		lengthdir_y(1.5, angle), 
+		lengthdir_x(2, angle),
+		lengthdir_y(2, angle), 
 		irandom(360), 1)
 		
-	prt.speed_x = lengthdir_x(1, angle)
-	prt.speed_y = lengthdir_y(1, angle)
-	prt.speed_alpha = random_range(-0.15, -0.09)
+	prt.speed_x = lengthdir_x(0.5, angle)
+	prt.speed_y = lengthdir_y(0.5, angle)
+	//prt.speed_alpha = random_range(-0.08, -0.04)
 	
 	ds_list_add(parts, prt)
+	ds_list_add(big_parts, prt)
 }
 
 // Small parts
-var number = irandom_range(4, 6)
+var number = irandom_range(4, 8)
 var angle = irandom_range(40, 90)
 for (var i = 0; i < number; i ++) {
 	var prt = new part(spr_snowball_part_small,
 		0, 0, angle, 1)
 	
-	prt.speed_x = lengthdir_x(4, angle)
-	prt.speed_y = lengthdir_y(4, angle)
-	prt.speed_alpha = random_range(-0.15, -0.09)
+	prt.speed_x = lengthdir_x(3.5, angle)
+	prt.speed_y = lengthdir_y(3.5, angle)
+	prt.speed_alpha = random_range(-0.10, -0.07)
 	
 	ds_list_add(parts, prt)
 	angle += irandom_range(40, 90)

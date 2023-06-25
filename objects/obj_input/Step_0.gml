@@ -34,4 +34,8 @@ if (!external_input) {
 	pip.input_mb_left = mouse_check_button(mb_left)
 	pip.input_mb_left_press = mouse_check_button_pressed(mb_left)
 	pip.input_mb_left_release = mouse_check_button_released(mb_left)	
+	
+	pip.input_mb_right = mouse_check_button(mb_right)
+	pip.input_mb_right_press = mouse_check_button_pressed(mb_right)
+	pip.input_mb_right_release = mouse_check_button_released(mb_right)	
 }

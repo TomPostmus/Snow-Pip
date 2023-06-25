@@ -3,10 +3,10 @@
     {"name":"Pip","order":20,"path":"folders/Pip.yy",},
     {"name":"Rooms","order":10,"path":"folders/Rooms.yy",},
     {"name":"Sprites","order":11,"path":"folders/Sprites.yy",},
-    {"name":"pip_arm","order":5,"path":"folders/Sprites/pip/pip_arm.yy",},
-    {"name":"wall","order":4,"path":"folders/Sprites/wall.yy",},
     {"name":"pip","order":16,"path":"folders/Sprites/pip.yy",},
+    {"name":"pip_arm","order":5,"path":"folders/Sprites/pip/pip_arm.yy",},
     {"name":"snowball","order":17,"path":"folders/Sprites/snowball.yy",},
+    {"name":"wall","order":4,"path":"folders/Sprites/wall.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"spr_snowball_part_big2","order":3,"path":"sprites/spr_snowball_part_big2/spr_snowball_part_big2.yy",},
@@ -35,6 +35,7 @@
     {"name":"obj_camera","order":15,"path":"objects/obj_camera/obj_camera.yy",},
     {"name":"spr_pip_hmask_head","order":2,"path":"sprites/spr_pip_hmask_head/spr_pip_hmask_head.yy",},
     {"name":"spr_wall_collision","order":3,"path":"sprites/spr_wall_collision/spr_wall_collision.yy",},
+    {"name":"spr_pip_arm_throw_spin","order":5,"path":"sprites/spr_pip_arm_throw_spin/spr_pip_arm_throw_spin.yy",},
     {"name":"obj_snowball","order":21,"path":"objects/obj_snowball/obj_snowball.yy",},
   ],
 }

@@ -1,1 +1,1 @@
-phy_rotation = false // disable rotation
+phy_fixed_rotation = true // disable rotation
