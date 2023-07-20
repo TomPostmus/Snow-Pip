@@ -18,6 +18,7 @@
     {"name":"spr_pip_head","order":1,"path":"sprites/spr_pip_head/spr_pip_head.yy",},
     {"name":"spr_snowball_cloud","order":1,"path":"sprites/spr_snowball_cloud/spr_snowball_cloud.yy",},
     {"name":"init","order":1,"path":"rooms/init/init.yy",},
+    {"name":"obj_client","order":23,"path":"objects/obj_client/obj_client.yy",},
     {"name":"spr_tex_blocks","order":1,"path":"sprites/spr_tex_blocks/spr_tex_blocks.yy",},
     {"name":"obj_wall_collision","order":13,"path":"objects/obj_wall_collision/obj_wall_collision.yy",},
     {"name":"spr_snowball_part_small","order":4,"path":"sprites/spr_snowball_part_small/spr_snowball_part_small.yy",},

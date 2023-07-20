@@ -9,7 +9,7 @@ if (!external_input) {
 	pip.input_lateral = lateral
 	
 	// Move pip
-	var disp_axial = forward * 1.7 - backward * 1.2 // displacement
+	var disp_axial = !(forward && backward) * (forward * 1.7 - backward * 1.2) // displacement
 	var disp_lateral = lateral * 0.8
 	pip.collision.phy_position_x += 
 		lengthdir_x(disp_axial, pip.rotation) +

@@ -37,6 +37,7 @@
     {"id":{"name":"spr_pip_head","path":"sprites/spr_pip_head/spr_pip_head.yy",},},
     {"id":{"name":"spr_snowball_cloud","path":"sprites/spr_snowball_cloud/spr_snowball_cloud.yy",},},
     {"id":{"name":"init","path":"rooms/init/init.yy",},},
+    {"id":{"name":"obj_client","path":"objects/obj_client/obj_client.yy",},},
     {"id":{"name":"spr_tex_blocks","path":"sprites/spr_tex_blocks/spr_tex_blocks.yy",},},
     {"id":{"name":"obj_wall_collision","path":"objects/obj_wall_collision/obj_wall_collision.yy",},},
     {"id":{"name":"spr_snowball_part_small","path":"sprites/spr_snowball_part_small/spr_snowball_part_small.yy",},},

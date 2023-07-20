@@ -23,7 +23,7 @@ if (spin) {
 	speed_x = lengthdir_x(spd, next_dir)
 	speed_y = lengthdir_y(spd, next_dir)
 } else {
-	image_angle += 2 // sublte sprite spin effect
+	image_angle += 2 // subtle sprite spin effect
 }
 	
 
