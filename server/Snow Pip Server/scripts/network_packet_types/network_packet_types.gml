@@ -1,0 +1,5 @@
+enum PACK {
+	HELLO,
+	UPDATE_SERVER,
+	UPDATE_CLIENT
+}

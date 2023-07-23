@@ -21,6 +21,8 @@
   },
   "resources": [
     {"id":{"name":"obj_server","path":"objects/obj_server/obj_server.yy",},},
+    {"id":{"name":"network_packet_types","path":"scripts/network_packet_types/network_packet_types.yy",},},
+    {"id":{"name":"obj_client_connection","path":"objects/obj_client_connection/obj_client_connection.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
   ],
   "RoomOrderNodes": [

@@ -57,6 +57,7 @@
     {"id":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},},
     {"id":{"name":"spr_pip_hmask_head","path":"sprites/spr_pip_hmask_head/spr_pip_hmask_head.yy",},},
     {"id":{"name":"spr_snowball","path":"sprites/spr_snowball/spr_snowball.yy",},},
+    {"id":{"name":"network_packet_types","path":"scripts/network_packet_types/network_packet_types.yy",},},
     {"id":{"name":"spr_wall_collision","path":"sprites/spr_wall_collision/spr_wall_collision.yy",},},
     {"id":{"name":"spr_pip_arm_throw_spin","path":"sprites/spr_pip_arm_throw_spin/spr_pip_arm_throw_spin.yy",},},
     {"id":{"name":"obj_snowball","path":"objects/obj_snowball/obj_snowball.yy",},},

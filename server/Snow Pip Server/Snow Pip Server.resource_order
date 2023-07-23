@@ -4,5 +4,7 @@
   ],
   "ResourceOrderSettings": [
     {"name":"obj_server","order":11,"path":"objects/obj_server/obj_server.yy",},
+    {"name":"network_packet_types","order":12,"path":"scripts/network_packet_types/network_packet_types.yy",},
+    {"name":"obj_client_connection","order":13,"path":"objects/obj_client_connection/obj_client_connection.yy",},
   ],
 }

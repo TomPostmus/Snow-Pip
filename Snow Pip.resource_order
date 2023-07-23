@@ -35,6 +35,7 @@
     {"name":"tex_blocks","order":2,"path":"tilesets/tex_blocks/tex_blocks.yy",},
     {"name":"obj_camera","order":15,"path":"objects/obj_camera/obj_camera.yy",},
     {"name":"spr_pip_hmask_head","order":2,"path":"sprites/spr_pip_hmask_head/spr_pip_hmask_head.yy",},
+    {"name":"network_packet_types","order":24,"path":"scripts/network_packet_types/network_packet_types.yy",},
     {"name":"spr_wall_collision","order":3,"path":"sprites/spr_wall_collision/spr_wall_collision.yy",},
     {"name":"spr_pip_arm_throw_spin","order":5,"path":"sprites/spr_pip_arm_throw_spin/spr_pip_arm_throw_spin.yy",},
     {"name":"obj_snowball","order":21,"path":"objects/obj_snowball/obj_snowball.yy",},
