@@ -5,6 +5,8 @@
   "ResourceOrderSettings": [
     {"name":"obj_server","order":11,"path":"objects/obj_server/obj_server.yy",},
     {"name":"network_packet_types","order":12,"path":"scripts/network_packet_types/network_packet_types.yy",},
+    {"name":"obj_player","order":14,"path":"objects/obj_player/obj_player.yy",},
+    {"name":"unique_player_id","order":15,"path":"scripts/unique_player_id/unique_player_id.yy",},
     {"name":"obj_client_connection","order":13,"path":"objects/obj_client_connection/obj_client_connection.yy",},
   ],
 }

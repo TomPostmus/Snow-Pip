@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "network_packet_types",
+  "name": "unique_player_id",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Networking",
-    "path": "folders/Networking.yy",
+    "name": "Snow Pip Server",
+    "path": "Snow Pip Server.yyp",
   },
 }

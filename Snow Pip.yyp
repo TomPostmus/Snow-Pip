@@ -18,6 +18,7 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"pip_arm","folderPath":"folders/Sprites/pip/pip_arm.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"snowball","folderPath":"folders/Sprites/snowball.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"wall","folderPath":"folders/Sprites/wall.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Networking","folderPath":"folders/Networking.yy",},
   ],
   "IncludedFiles": [],
   "isEcma": false,
@@ -39,6 +40,7 @@
     {"id":{"name":"init","path":"rooms/init/init.yy",},},
     {"id":{"name":"obj_client","path":"objects/obj_client/obj_client.yy",},},
     {"id":{"name":"spr_tex_blocks","path":"sprites/spr_tex_blocks/spr_tex_blocks.yy",},},
+    {"id":{"name":"init_networking","path":"rooms/init_networking/init_networking.yy",},},
     {"id":{"name":"obj_wall_collision","path":"objects/obj_wall_collision/obj_wall_collision.yy",},},
     {"id":{"name":"spr_snowball_part_small","path":"sprites/spr_snowball_part_small/spr_snowball_part_small.yy",},},
     {"id":{"name":"obj_pip","path":"objects/obj_pip/obj_pip.yy",},},
@@ -50,6 +52,7 @@
     {"id":{"name":"obj_input","path":"objects/obj_input/obj_input.yy",},},
     {"id":{"name":"spr_snowball_part_big1","path":"sprites/spr_snowball_part_big1/spr_snowball_part_big1.yy",},},
     {"id":{"name":"spr_pip_arm_hold","path":"sprites/spr_pip_arm_hold/spr_pip_arm_hold.yy",},},
+    {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},
     {"id":{"name":"spr_pip_trunk","path":"sprites/spr_pip_trunk/spr_pip_trunk.yy",},},
     {"id":{"name":"spr_camera","path":"sprites/spr_camera/spr_camera.yy",},},
     {"id":{"name":"obj_init_graphics","path":"objects/obj_init_graphics/obj_init_graphics.yy",},},
@@ -65,6 +68,7 @@
   ],
   "RoomOrderNodes": [
     {"roomId":{"name":"init","path":"rooms/init/init.yy",},},
+    {"roomId":{"name":"init_networking","path":"rooms/init_networking/init_networking.yy",},},
     {"roomId":{"name":"stage_maze","path":"rooms/stage_maze/stage_maze.yy",},},
   ],
   "TextureGroups": [
