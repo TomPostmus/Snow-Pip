@@ -1,3 +1,6 @@
+game = instance_create_layer(0, 0, // create game inst of server
+	"Instances", obj_game)
+
 // Open server
 port = 3929
 tcp_socket = network_create_server(network_socket_tcp, port, 64)
@@ -12,6 +15,7 @@ function client_connect(client_socket) {
 		"Instances", obj_client_connection
 	)
 	client.socket = client_socket
+	client.game = game // pass game inst reference to client connection
 }
 
 function client_disconnect(client_socket) {

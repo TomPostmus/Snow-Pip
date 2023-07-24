@@ -1,5 +1,6 @@
 {
   "FolderOrderSettings": [
+    {"name":"Networking","order":25,"path":"folders/Networking.yy",},
     {"name":"Pip","order":20,"path":"folders/Pip.yy",},
     {"name":"Rooms","order":10,"path":"folders/Rooms.yy",},
     {"name":"Sprites","order":11,"path":"folders/Sprites.yy",},
@@ -7,7 +8,6 @@
     {"name":"pip_arm","order":5,"path":"folders/Sprites/pip/pip_arm.yy",},
     {"name":"snowball","order":17,"path":"folders/Sprites/snowball.yy",},
     {"name":"wall","order":4,"path":"folders/Sprites/wall.yy",},
-    {"name":"Networking","order":25,"path":"folders/Networking.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"spr_snowball_part_big2","order":3,"path":"sprites/spr_snowball_part_big2/spr_snowball_part_big2.yy",},

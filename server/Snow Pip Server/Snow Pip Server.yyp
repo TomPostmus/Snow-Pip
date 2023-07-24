@@ -23,8 +23,8 @@
     {"id":{"name":"obj_server","path":"objects/obj_server/obj_server.yy",},},
     {"id":{"name":"network_packet_types","path":"scripts/network_packet_types/network_packet_types.yy",},},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},
-    {"id":{"name":"unique_player_id","path":"scripts/unique_player_id/unique_player_id.yy",},},
     {"id":{"name":"obj_client_connection","path":"objects/obj_client_connection/obj_client_connection.yy",},},
+    {"id":{"name":"obj_game","path":"objects/obj_game/obj_game.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
   ],
   "RoomOrderNodes": [

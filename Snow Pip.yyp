@@ -11,6 +11,7 @@
   },
   "defaultScriptType": 1,
   "Folders": [
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Networking","folderPath":"folders/Networking.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Pip","folderPath":"folders/Pip.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Rooms","folderPath":"folders/Rooms.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Sprites","folderPath":"folders/Sprites.yy",},
@@ -18,7 +19,6 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"pip_arm","folderPath":"folders/Sprites/pip/pip_arm.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"snowball","folderPath":"folders/Sprites/snowball.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"wall","folderPath":"folders/Sprites/wall.yy",},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Networking","folderPath":"folders/Networking.yy",},
   ],
   "IncludedFiles": [],
   "isEcma": false,
