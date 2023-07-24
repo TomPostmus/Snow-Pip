@@ -1,0 +1,2 @@
+// Game state
+state = undefined

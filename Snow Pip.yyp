@@ -30,6 +30,7 @@
     {"id":{"name":"spr_wall_simple","path":"sprites/spr_wall_simple/spr_wall_simple.yy",},},
     {"id":{"name":"spr_snowball_part_big2","path":"sprites/spr_snowball_part_big2/spr_snowball_part_big2.yy",},},
     {"id":{"name":"spr_pip_hmask_trunk","path":"sprites/spr_pip_hmask_trunk/spr_pip_hmask_trunk.yy",},},
+    {"id":{"name":"obj_game","path":"objects/obj_game/obj_game.yy",},},
     {"id":{"name":"spr_pip_collision","path":"sprites/spr_pip_collision/spr_pip_collision.yy",},},
     {"id":{"name":"obj_pip_collision","path":"objects/obj_pip_collision/obj_pip_collision.yy",},},
     {"id":{"name":"spr_pip_arm_pickup","path":"sprites/spr_pip_arm_pickup/spr_pip_arm_pickup.yy",},},

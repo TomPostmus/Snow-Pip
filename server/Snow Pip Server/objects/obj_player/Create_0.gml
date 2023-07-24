@@ -1,3 +1,3 @@
 // Player properties
-name = ""
+name = "new_player"
 player_id = -1

@@ -1,5 +1,5 @@
 // Initial game state
-state = "lobby"
+state = GAME_STATE.LOBBY
 
 // Get unique list of players
 function unique_player_id() {

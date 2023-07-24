@@ -12,6 +12,7 @@
   "ResourceOrderSettings": [
     {"name":"spr_snowball_part_big2","order":3,"path":"sprites/spr_snowball_part_big2/spr_snowball_part_big2.yy",},
     {"name":"spr_pip_hmask_trunk","order":3,"path":"sprites/spr_pip_hmask_trunk/spr_pip_hmask_trunk.yy",},
+    {"name":"obj_game","order":3,"path":"objects/obj_game/obj_game.yy",},
     {"name":"obj_pip_collision","order":3,"path":"objects/obj_pip_collision/obj_pip_collision.yy",},
     {"name":"spr_pip_arm_pickup","order":4,"path":"sprites/spr_pip_arm_pickup/spr_pip_arm_pickup.yy",},
     {"name":"obj_pip_hmask_head","order":4,"path":"objects/obj_pip_hmask_head/obj_pip_hmask_head.yy",},
