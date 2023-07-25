@@ -45,9 +45,27 @@ function send_game_update() {
 	buffer_write(buffer, buffer_u8, game.state) // write game state
 	buffer_write(buffer, buffer_u8, instance_number(obj_player)) // nr of players
 	
-	// put info of each player
+	// put id of each player
 	with (obj_player) {
 		buffer_write(buffer, buffer_u8, player_id)
+	}
+	
+	// send packet to client
+	network_send_packet(socket, buffer, buffer_get_size(buffer))
+	buffer_delete(buffer)
+}
+
+// Send packet with player information
+function send_player_update() {
+	// create buffer
+	var buffer = buffer_create(256, buffer_grow, 1)
+	buffer_seek(buffer, buffer_seek_start, 0)
+	buffer_write(buffer, buffer_u8, PACK.UPDATE_PLAYER)
+	
+	buffer_write(buffer, buffer_u8, instance_number(obj_player)) // nr of players
+	
+	// put id of each player
+	with (obj_player) {
 		buffer_write(buffer, buffer_string, name)
 	}
 	

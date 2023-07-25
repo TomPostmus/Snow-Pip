@@ -1,5 +1,7 @@
 socket = network_create_socket(network_socket_tcp)
 
+client_players = ds_list_create() // list containing player ids of current client's players
+
 // Try to connect
 port = 3929
 url = "127.0.0.1"
@@ -22,7 +24,7 @@ function send_hello(nr_players) {
 
 // Send packet containing (non-realtime) player info
 function send_player_update() {
-
+	
 }
 
 // Read packet from server
@@ -38,13 +40,9 @@ function read_packet(buffer) {
 function read_hello(buffer) {
 	var nr = buffer_read(buffer, buffer_u8)
 	
-	// create local players
 	for (var i = 0; i < nr; i ++) {
-		var player = instance_create_layer(0, 0,
-			"Instances", obj_player)
-	
-		player.local = true
-		player.player_id = buffer_read(buffer, buffer_u8) // read player id from packet
+		var pl_id = buffer_read(buffer, buffer_u8) // read player id from packet
+		ds_list_add(client_players, pl_id) // add to client players list
 	}
 }
 
@@ -60,6 +58,13 @@ function read_game_update(buffer) {
 		
 		
 	}
+}
+
+// Read player update packet
+function read_player_update(buffer) {
+	game.state = buffer_read(buffer, buffer_u8) // read game state
+	
+	var nr = buffer_read(buffer, buffer_u8) // read number of players
 }
 
 game = instance_create_layer(0, 0, "Instances", obj_game) // local repr of game
