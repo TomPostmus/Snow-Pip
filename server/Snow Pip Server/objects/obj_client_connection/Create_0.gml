@@ -5,18 +5,13 @@ function read_packet(buffer) {
 	var type = buffer_read(buffer, buffer_u8)
 	switch (type) {
 		case PACK.HELLO: read_hello(buffer)
+		case PACK.UPDATE_PLAYER: read_player_update(buffer)
 	}
 }
 
-// Read packet of type HELLO and immediately respond
+// Read packet of type HELLO
 function read_hello(buffer) {
 	var nr = buffer_read(buffer, buffer_u8) // nr of new players from client
-	
-	// create response buffer
-	var resp_buffer = buffer_create(256, buffer_grow, 1)
-	buffer_seek(resp_buffer, buffer_seek_start, 0)
-	buffer_write(resp_buffer, buffer_u8, PACK.HELLO)
-	buffer_write(resp_buffer, buffer_u8, nr) // put nr of players in response
 	
 	// read player names from packet and create player insts
 	for (var i = 0; i < nr; i ++) {
@@ -25,14 +20,33 @@ function read_hello(buffer) {
 			
 		player.player_id = game.unique_player_id() // get a unique id for this player
 			
-		ds_list_add(client_players, player) // add new player to players list of current client connection
-		
-		buffer_write(resp_buffer, buffer_u8, player.player_id) // add new player id to response
+		ds_list_add(client_players, player) // add new player to players list of current client connection		
 	}
 	
-	// send response to client
-	network_send_packet(socket, resp_buffer, buffer_get_size(resp_buffer))
-	buffer_delete(resp_buffer)
+	send_hello() // immediately respond
+	send_game_update() // also immediately send game update
+}
+
+// Send HELLO packet with unique player ids of client
+function send_hello() {
+	var nr = ds_list_size(client_players)
+	
+	// create response buffer
+	var buffer = buffer_create(256, buffer_grow, 1)
+	buffer_seek(buffer, buffer_seek_start, 0)
+	buffer_write(buffer, buffer_u8, PACK.HELLO)
+	buffer_write(buffer, buffer_u8, nr) // put nr of players in response
+	
+	// add player ids of this client
+	for (var i = 0; i < nr; i ++) {
+		var player = client_players[|i]
+		
+		buffer_write(buffer, buffer_u8, player.player_id) // add player id to response
+	}
+	
+	// send packet to client
+	network_send_packet(socket, buffer, buffer_get_size(buffer))
+	buffer_delete(buffer)
 }
 
 // Send packet with game update info
@@ -53,6 +67,11 @@ function send_game_update() {
 	// send packet to client
 	network_send_packet(socket, buffer, buffer_get_size(buffer))
 	buffer_delete(buffer)
+}
+
+// Read packet with player information
+function read_player_update(buffer) {
+
 }
 
 // Send packet with player information
