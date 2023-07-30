@@ -1,6 +1,16 @@
 // Initial game state
 state = GAME_STATE.LOBBY
 
+// Find player based on player id
+function find_player(player_id) {
+	with (obj_player) {
+		if (self.player_id == player_id)
+			return self
+	}
+	
+	return noone
+}
+
 // Get unique list of players
 function unique_player_id() {
 	var player_ids = player_id_list()

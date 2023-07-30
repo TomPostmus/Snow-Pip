@@ -1,11 +1,11 @@
 socket = network_create_socket(network_socket_tcp)
 game = instance_create_layer(0, 0, "Instances", obj_game) // local repr of game
 
-// Client state machine
-state = "send_hello" // initial state
+// Connection state machine
+connected = false
+connect_state = "send_hello" // initial state
 received_hello = false // whether hello response has been received (from async event)
 received_game_update = false // whether game update has been received (from async event)
-received_player_update = false // whether player update has been received (from async event)
 
 // Try to connect
 port = 3929
@@ -35,10 +35,12 @@ function send_player_update() {
 	
 	var buffer = buffer_create(256, buffer_grow, 1)
 	buffer_seek(buffer, buffer_seek_start, 0)
-	buffer_write(buffer, buffer_u8, PACK.HELLO)
+	buffer_write(buffer, buffer_u8, PACK.UPDATE_PLAYER)
 	buffer_write(buffer, buffer_u8, nr_players) // write nr of players
 	
+	// put id of each player and then info
 	with (obj_player_local) {
+		buffer_write(buffer, buffer_u8, player_id)
 		buffer_write(buffer, buffer_string, name)
 	}
 	
@@ -50,9 +52,9 @@ function send_player_update() {
 function read_packet(buffer) {
 	var type = buffer_read(buffer, buffer_u8)
 	switch (type) {
-		case PACK.HELLO: read_hello(buffer)
-		case PACK.UPDATE_GAME: read_game_update(buffer)
-		case PACK.UPDATE_PLAYER: read_player_update(buffer)
+		case PACK.HELLO: read_hello(buffer); break
+		case PACK.UPDATE_GAME: read_game_update(buffer); break;
+		case PACK.UPDATE_PLAYER: read_player_update(buffer) break;
 	}
 }
 
@@ -67,7 +69,7 @@ function read_hello(buffer) {
 		ds_list_add(game.local_players, pl_id) // add to local players list
 	}
 	
-	received_hello = true // notify state machine
+	received_hello = true // notify connect state machine
 }
 
 // Read game update packet
@@ -83,15 +85,19 @@ function read_game_update(buffer) {
 		ds_list_add(game.players, pl_id) // add to players list		
 	}
 	
-	received_game_update = true // notify state machine
+	if (!connected) // if still in connection state machine
+		received_game_update = true // notify state machine
+	else {			// else handle immediately
+		game.switch_room()			// switch room (if applicable)
+		game.update_player_list()	// update player list
+	}
 }
 
 // Read player update packet
-function read_player_update(buffer) {
-	game.state = buffer_read(buffer, buffer_u8) // read game state
-	
+function read_player_update(buffer) {	
 	var nr = buffer_read(buffer, buffer_u8) // read number of players
 	
+	// For each player update info
 	for (var i = 0; i < nr; i ++) {
 		var pl_id = buffer_read(buffer, buffer_u8) // read player id from packet
 		var name = buffer_read(buffer, buffer_string) // read player name from packet

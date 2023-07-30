@@ -4,9 +4,15 @@ client_players = ds_list_create() // player insts belonging to this client conne
 function read_packet(buffer) {
 	var type = buffer_read(buffer, buffer_u8)
 	switch (type) {
-		case PACK.HELLO: read_hello(buffer)
-		case PACK.UPDATE_PLAYER: read_player_update(buffer)
+		case PACK.HELLO: read_hello(buffer); break
+		case PACK.UPDATE_PLAYER: read_player_update(buffer); break
 	}
+}
+
+// Send packet to client
+function send_packet(buffer) {
+	network_send_packet(socket, buffer, buffer_get_size(buffer))
+	buffer_delete(buffer)
 }
 
 // Read packet of type HELLO
@@ -24,7 +30,9 @@ function read_hello(buffer) {
 	}
 	
 	send_hello() // immediately respond
-	send_game_update() // also immediately send game update
+	
+	// also send game update (part of sequential connection protocol)
+	send_game_update()
 }
 
 // Send HELLO packet with unique player ids of client
@@ -44,53 +52,36 @@ function send_hello() {
 		buffer_write(buffer, buffer_u8, player.player_id) // add player id to response
 	}
 	
-	// send packet to client
-	network_send_packet(socket, buffer, buffer_get_size(buffer))
-	buffer_delete(buffer)
+	send_packet(buffer)
 }
 
 // Send packet with game update info
 function send_game_update() {
-	// create buffer
-	var buffer = buffer_create(256, buffer_grow, 1)
-	buffer_seek(buffer, buffer_seek_start, 0)
-	buffer_write(buffer, buffer_u8, PACK.UPDATE_GAME)
+	var buffer = server.packgen_game_update()
 	
-	buffer_write(buffer, buffer_u8, game.state) // write game state
-	buffer_write(buffer, buffer_u8, instance_number(obj_player)) // nr of players
-	
-	// put id of each player
-	with (obj_player) {
-		buffer_write(buffer, buffer_u8, player_id)
-	}
-	
-	// send packet to client
-	network_send_packet(socket, buffer, buffer_get_size(buffer))
-	buffer_delete(buffer)
+	send_packet(buffer)
 }
 
 // Read packet with player information
 function read_player_update(buffer) {
-
-}
-
-// Send packet with player information
-function send_player_update() {
-	// create buffer
-	var buffer = buffer_create(256, buffer_grow, 1)
-	buffer_seek(buffer, buffer_seek_start, 0)
-	buffer_write(buffer, buffer_u8, PACK.UPDATE_PLAYER)
+	var nr = buffer_read(buffer, buffer_u8) // nr of new players from client
 	
-	buffer_write(buffer, buffer_u8, instance_number(obj_player)) // nr of players
-	
-	// put id of each player
-	with (obj_player) {
-		buffer_write(buffer, buffer_string, name)
+	// read player names from packet and set information
+	for (var i = 0; i < nr; i ++) {
+		var pl_id = buffer_read(buffer, buffer_u8)
+		
+		if (ds_list_find_index(client_players, pl_id) == -1) { // check if player belongs to client
+			send_error(NETWORK_ERROR.INVALID_PLAYER_ID)
+			return
+		}
+		
+		var player = game.find_player(pl_id)
+		
+		player.name = buffer_read(buffer, buffer_string)
 	}
 	
-	// send packet to client
-	network_send_packet(socket, buffer, buffer_get_size(buffer))
-	buffer_delete(buffer)
+	// notify server to broadcast player update
+	server.broadcast_player_update = true
 }
 
 // Send packet with movement update of each client
@@ -107,4 +98,17 @@ function send_movement_update() {
 	//	buffer_write(buffer, buffer_u8, player_id)
 	//	buffer_write(buffer, buffer_string, name)
 	//}
+}
+
+// Send packet with server error
+function send_error(error_code) {
+	// create buffer
+	var buffer = buffer_create(256, buffer_grow, 1)
+	buffer_seek(buffer, buffer_seek_start, 0)
+	buffer_write(buffer, buffer_u8, PACK.ERROR)
+	buffer_write(buffer, buffer_u8, error_code)
+	
+	// send packet to client
+	network_send_packet(socket, buffer, buffer_get_size(buffer))
+	buffer_delete(buffer)
 }
