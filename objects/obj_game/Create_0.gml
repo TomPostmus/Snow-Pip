@@ -28,7 +28,7 @@ function find_player(player_id) {
 }
 
 // Remove or add players based on player list received from server
-function update_player_list() {
+function update_player_list() {	
 	// add new players
 	for (var i = 0; i < ds_list_size(players); i ++) {
 		var pl_id = players[|i];
@@ -49,8 +49,8 @@ function update_player_list() {
 	
 	// remove left players
 	with (obj_player) {
-		if (ds_list_find_index(
-			other.players, player_id) == -1)
+		if (ds_list_find_index(other.players, player_id) == -1) {
 			instance_destroy()
+		}
 	}
 }

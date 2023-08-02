@@ -12,6 +12,8 @@
   "defaultScriptType": 1,
   "Folders": [
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Rooms","folderPath":"folders/Rooms.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"sprites","folderPath":"folders/sprites.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"wall","folderPath":"folders/sprites/wall.yy",},
   ],
   "IncludedFiles": [],
   "isEcma": false,
@@ -23,12 +25,19 @@
     {"id":{"name":"obj_server","path":"objects/obj_server/obj_server.yy",},},
     {"id":{"name":"network_packet_types","path":"scripts/network_packet_types/network_packet_types.yy",},},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},
+    {"id":{"name":"stage_maze","path":"rooms/stage_maze/stage_maze.yy",},},
+    {"id":{"name":"spr_tex_blocks_1","path":"sprites/spr_tex_blocks_1/spr_tex_blocks_1.yy",},},
+    {"id":{"name":"tex_blocks_1","path":"tilesets/tex_blocks_1/tex_blocks_1.yy",},},
+    {"id":{"name":"obj_wall_collision","path":"objects/obj_wall_collision/obj_wall_collision.yy",},},
     {"id":{"name":"obj_client_connection","path":"objects/obj_client_connection/obj_client_connection.yy",},},
+    {"id":{"name":"spr_spawn","path":"sprites/spr_spawn/spr_spawn.yy",},},
+    {"id":{"name":"spr_wall_collision","path":"sprites/spr_wall_collision/spr_wall_collision.yy",},},
     {"id":{"name":"obj_game","path":"objects/obj_game/obj_game.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
   ],
   "RoomOrderNodes": [
     {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"roomId":{"name":"stage_maze","path":"rooms/stage_maze/stage_maze.yy",},},
   ],
   "TextureGroups": [
     {"resourceType":"GMTextureGroup","resourceVersion":"1.3","name":"Default","autocrop":true,"border":2,"compressFormat":"bz2","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"targets":-1,},

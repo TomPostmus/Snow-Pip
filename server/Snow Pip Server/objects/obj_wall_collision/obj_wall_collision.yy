@@ -6,8 +6,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Room Objects",
-    "path": "folders/Room Objects.yy",
+    "name": "sprites",
+    "path": "folders/sprites.yy",
   },
   "parentObjectId": null,
   "persistent": false,

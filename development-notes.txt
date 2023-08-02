@@ -1,0 +1,8 @@
+## We do not trust client
+Even though Snow Pip is intended as a wholesome game with little progression and rewards, the game is designed to minimalise cheating. It is planned to have some leaderboards in which players can climb and show their skill. So there is likely at least some incentive for cheating.
+
+Therefore, on the server-side the game is simulated coarsely, that is, without physics and other details. Solely the positions of the players are simulated. In this way, the server can take care of fair spawns and item provision. Furthermore, the server can verify that the players move as expected (e.g. not faster) and can verify hits of players using simulation of the snowball trajectories.
+
+It is planned to have a major share of the servers hosted by third-party persons. These persons can use a user friendly interface to ban cheaters from their servers. Third-party servers will likely be unranked by default (since server could be modified for cheating), unless the hosts are trusted (still unsure how this could be implemented).
+
+Perhaps AI techniques (e.g. anomaly detection) could be used to autonomously supervise (and ban) users on first-party servers.

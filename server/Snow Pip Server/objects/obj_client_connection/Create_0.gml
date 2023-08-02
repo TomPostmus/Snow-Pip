@@ -1,4 +1,4 @@
-client_players = ds_list_create() // player insts belonging to this client connection
+client_players = ds_list_create() // player ids belonging to this client connection
 
 // Read packet from this client connection
 function read_packet(buffer) {
@@ -26,13 +26,13 @@ function read_hello(buffer) {
 			
 		player.player_id = game.unique_player_id() // get a unique id for this player
 			
-		ds_list_add(client_players, player) // add new player to players list of current client connection		
+		ds_list_add(client_players, player.player_id) // add new player to players list of current client connection		
 	}
 	
 	send_hello() // immediately respond
 	
-	// also send game update (part of sequential connection protocol)
-	send_game_update()
+	// notify server to broadcast game update (containing info of new players)
+	server.broadcast_game_update = true
 }
 
 // Send HELLO packet with unique player ids of client
@@ -47,17 +47,10 @@ function send_hello() {
 	
 	// add player ids of this client
 	for (var i = 0; i < nr; i ++) {
-		var player = client_players[|i]
+		var pl_id = client_players[|i]
 		
-		buffer_write(buffer, buffer_u8, player.player_id) // add player id to response
+		buffer_write(buffer, buffer_u8, pl_id) // add player id to response
 	}
-	
-	send_packet(buffer)
-}
-
-// Send packet with game update info
-function send_game_update() {
-	var buffer = server.packgen_game_update()
 	
 	send_packet(buffer)
 }

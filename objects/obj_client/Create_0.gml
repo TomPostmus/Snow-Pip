@@ -51,10 +51,17 @@ function send_player_update() {
 // Read packet from server (called from async networking event)
 function read_packet(buffer) {
 	var type = buffer_read(buffer, buffer_u8)
-	switch (type) {
-		case PACK.HELLO: read_hello(buffer); break
-		case PACK.UPDATE_GAME: read_game_update(buffer); break;
-		case PACK.UPDATE_PLAYER: read_player_update(buffer) break;
+	if (connected) {
+		switch (type) {
+			case PACK.HELLO: read_hello(buffer); break;
+			case PACK.UPDATE_GAME: read_game_update(buffer); break;
+			case PACK.UPDATE_PLAYER: read_player_update(buffer) break;
+		}
+	} else { // if still in connection state machine, we do not act on other packets
+		switch (type) {
+			case PACK.HELLO: read_hello(buffer); break;
+			case PACK.UPDATE_GAME: read_game_update(buffer); break;
+		}
 	}
 }
 
@@ -85,9 +92,17 @@ function read_game_update(buffer) {
 		ds_list_add(game.players, pl_id) // add to players list		
 	}
 	
-	if (!connected) // if still in connection state machine
-		received_game_update = true // notify state machine
-	else {			// else handle immediately
+	if (!connected) {// if still in connection state machine
+		var contained = true // whether local players are contained in player list
+		for (var i = 0; i < ds_list_size(game.local_players); i ++) {
+			var pl_id = game.local_players[|i]
+			if (ds_list_find_index(game.players, pl_id) == -1)
+				contained = false
+		}		
+		
+		if (contained && received_hello) // check that game update contains local players (or is maybe outdated)
+			received_game_update = true // notify state machine
+	} else {			// else handle immediately
 		game.switch_room()			// switch room (if applicable)
 		game.update_player_list()	// update player list
 	}

@@ -16,8 +16,8 @@ if (connect_state == "send_hello") {
 	}
 	
 } if (connect_state == "send_player_update") {
-	send_player_update() // send information of local players
-	
-	connect_state = "connected" // go immediately to general server update listening connect_state
+	connect_state = "connected"
 	connected = true
+	
+	send_player_update() // send information of local players
 }

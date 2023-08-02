@@ -1,5 +1,10 @@
 game = instance_create_layer(0, 0, // create game inst of server
 	"Instances", obj_game)
+	
+// Window position
+var window_w = window_get_width()
+var display_w = display_get_width()
+window_set_position(display_w / 2 - window_w / 2, 30)
 
 // Broadcasting flags
 broadcast_game_update = false
@@ -21,9 +26,6 @@ function client_connect(client_socket) {
 	client.socket = client_socket
 	client.server = self // pass reference to this server inst to client connection
 	client.game = game // pass game inst reference to client connection
-	
-	// notify broadcasting service
-	broadcast_game_update = true // broadcast client arrival
 }
 
 // Client diconnecting, remove client
@@ -48,7 +50,8 @@ function incoming_tcp_data(client_socket, buffer) {
 // Broadcast packet to all client connections
 function broadcast_packet(buffer) {
 	with (obj_client_connection)
-		send_packet(buffer)
+		network_send_packet(socket, buffer, buffer_get_size(buffer))
+	buffer_delete(buffer)
 }
 
 
