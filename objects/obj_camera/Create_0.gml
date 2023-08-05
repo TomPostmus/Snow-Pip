@@ -1,4 +1,4 @@
-target = instance_find(obj_pip_collision, 0)
+target = noone
 
 width = 640
 height = 640 / obj_init_graphics.screen_aspect

@@ -1,13 +1,17 @@
 // Sequential client connection state machine
-if (connect_state == "send_hello") {
+if (connect_state == "await_connection") {
+	if (received_server_connection) {
+		connect_state = "send_hello"
+	}
+} else if (connect_state == "send_hello") {
 	send_hello()						// send hello request
 	
 	connect_state = "await_hello"
-} if (connect_state == "await_hello") {
+} else if (connect_state == "await_hello") {
 	if (received_hello)
 		connect_state = "await_game_update"
 		
-} if (connect_state == "await_game_update") {
+} else if (connect_state == "await_game_update") {
 	if (received_game_update) {
 		game.switch_room()				// go to correct room
 		game.update_player_list()		// create players
@@ -15,7 +19,7 @@ if (connect_state == "send_hello") {
 		connect_state = "send_player_update"
 	}
 	
-} if (connect_state == "send_player_update") {
+} else if (connect_state == "send_player_update") {
 	connect_state = "connected"
 	connected = true
 	

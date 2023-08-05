@@ -3,6 +3,7 @@ enum PACK {
 	UPDATE_GAME, // packet from server to give game information (non-realtime)
 	UPDATE_PLAYER, // packet from client containing info about players (name, visuals)
 	UPDATE_MOVEMENT, // update containing movement from players (realtime), both server and client
+	SPAWN_PLAYER, // spawn player at location
 	
 	ERROR // server error
 }

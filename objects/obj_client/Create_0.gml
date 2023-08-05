@@ -2,19 +2,18 @@ socket = network_create_socket(network_socket_tcp)
 game = instance_create_layer(0, 0, "Instances", obj_game) // local repr of game
 
 // Connection state machine
-connected = false
-connect_state = "send_hello" // initial state
+connected = false // whether connection state machine is fully completed
+connect_state = "await_connection" // initial state
 received_hello = false // whether hello response has been received (from async event)
 received_game_update = false // whether game update has been received (from async event)
+received_server_connection = false // whether initial connection w server has been established
 
 // Try to connect
 port = 3929
 url = "127.0.0.1"
-var connect = network_connect(socket, url, port)
-while (connect < 0) {
-	port ++
-	connect = network_connect(socket, url, port)
-}
+network_connect_async(socket, url, port) // try non-blocking connection (see async network event for callback)
+connection_timeout = 300 // connection timeout of 5 seconds
+alarm[0] = connection_timeout // set connection timeout alarm
 
 // Send HELLO packet with amount of local players
 function send_hello() {

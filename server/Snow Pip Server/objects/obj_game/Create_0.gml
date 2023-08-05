@@ -1,6 +1,8 @@
 // Initial game state
 state = GAME_STATE.LOBBY
 
+respawn_time = 300 // how many steps to wait for respawn
+
 // Find player based on player id
 function find_player(player_id) {
 	with (obj_player) {
@@ -33,4 +35,21 @@ function player_id_list() {
 		ds_list_add(player_ids, player_id)
 	
 	return player_ids
+}
+
+// Spawn players at start spawns
+function start_spawn_players() {
+	for (var i = 0; i < instance_number(obj_player); i ++) {
+		var spawn = instance_find(obj_spawn, i)
+		var player = instance_find(obj_player, i)
+		
+		player.x = spawn.x
+		player.y = spawn.y
+		
+		player.hp = 100
+	}
+}
+
+function spawn_at_free_spawn(player) {
+
 }

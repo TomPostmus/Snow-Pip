@@ -1,21 +1,19 @@
 game = instance_create_layer(0, 0, // create game inst of server
 	"Instances", obj_game)
-	
-// Window position
-var window_w = window_get_width()
-var display_w = display_get_width()
-window_set_position(display_w / 2 - window_w / 2, 30)
+game.server = self
 
 // Broadcasting flags
 broadcast_game_update = false
 broadcast_player_update = false
 
+// Game state machine
+start_state = false
+
 // Open server
 port = 3929
 tcp_socket = network_create_server(network_socket_tcp, port, 64)
-while (tcp_socket < 0) { // in case of error try different port num
-	port ++
-	tcp_socket = network_create_server(network_socket_tcp, port, 64)
+if (tcp_socket < 0) { // in case of error 
+	throw "Server could not be opened (check if port "+ string(port) +" is free)."
 }
 
 // Client connection, create new client
@@ -49,8 +47,9 @@ function incoming_tcp_data(client_socket, buffer) {
 
 // Broadcast packet to all client connections
 function broadcast_packet(buffer) {
-	with (obj_client_connection)
+	with (obj_client_connection) {
 		network_send_packet(socket, buffer, buffer_get_size(buffer))
+	}
 	buffer_delete(buffer)
 }
 
@@ -89,6 +88,20 @@ function packgen_player_update() {
 		buffer_write(buffer, buffer_u8, player_id)
 		buffer_write(buffer, buffer_string, name)
 	}
+	
+	return buffer
+}
+
+// Generate spawn package of player (at its x y coordinates)
+function packgen_spawn_player(player) {
+	// create buffer
+	var buffer = buffer_create(256, buffer_grow, 1)
+	buffer_seek(buffer, buffer_seek_start, 0)
+	buffer_write(buffer, buffer_u8, PACK.SPAWN_PLAYER)
+	
+	buffer_write(buffer, buffer_u8, player.player_id) // write player id
+	buffer_write(buffer, buffer_f16, player.x) // write player x coordinate
+	buffer_write(buffer, buffer_f16, player.y) // write player y coordinate
 	
 	return buffer
 }
