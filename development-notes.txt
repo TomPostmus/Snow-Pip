@@ -6,3 +6,10 @@ Therefore, on the server-side the game is simulated coarsely, that is, without p
 It is planned to have a major share of the servers hosted by third-party persons. These persons can use a user friendly interface to ban cheaters from their servers. Third-party servers will likely be unranked by default (since server could be modified for cheating), unless the hosts are trusted (still unsure how this could be implemented).
 
 Perhaps AI techniques (e.g. anomaly detection) could be used to autonomously supervise (and ban) users on first-party servers.
+
+## Concurrency and reading packets in main thread
+For some types of packets, it is totally fine to read it and act on it immediately in the Network Async thread. However, some packets are better to read in the GameMaker main thread, the next step. For example, the Spawn packet is sent immediately after the Game Update packet (at the start of the game), but the room_goto command (from the Game Update) executes only at the end of the step. That means that if the packet is acted on (i.e. the player is spawned) in the Async Event, the player immediately gets destroyed when the room switches at the end of the step (and we do not want the player to be persistent).
+
+Also when receiving movement packets, it makes more sense to update the player's position in the main thread, i.e. every step, and not in the Async Event. Since then the player's position could be updated multiple times within a step, which is not useful.
+
+Hence, in the Async Event often flags and variables will be set (and then acted on in the main thread) instead of function calls, even though function calls are often more elegant code-wise. As far as I know, it is not possible in GameMaker to delay a function call to execute in the main thread.

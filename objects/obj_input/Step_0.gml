@@ -1,5 +1,11 @@
+// Find player
+if (!instance_exists(player))
+	player = instance_find(obj_player_local, relative_player_id)
+
 // Listen for user input
-if (!external_input) {
+if (instance_exists(player.pip)) {
+	var pip = player.pip
+	
 	// Move input
 	var lateral = keyboard_check(ord("A")) - keyboard_check(ord("D"))
 	var forward = keyboard_check(ord("W"))

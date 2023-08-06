@@ -6,6 +6,7 @@ function read_packet(buffer) {
 	switch (type) {
 		case PACK.HELLO: read_hello(buffer); break
 		case PACK.UPDATE_PLAYER: read_player_update(buffer); break
+		case PACK.UPDATE_MOVEMENT: read_movement_update(buffer); break
 	}
 }
 
@@ -104,4 +105,35 @@ function send_error(error_code) {
 	// send packet to client
 	network_send_packet(socket, buffer, buffer_get_size(buffer))
 	buffer_delete(buffer)
+}
+
+// Read packet with player movement
+function read_movement_update(buffer) {
+	var nr = buffer_read(buffer, buffer_u8) // nr of players for which update applies
+	
+	// read player names from packet and set information
+	for (var i = 0; i < nr; i ++) {
+		var pl_id = buffer_read(buffer, buffer_u8) // read player id
+		
+		if (ds_list_find_index(client_players, pl_id) == -1) { // check if player belongs to client
+			send_error(NETWORK_ERROR.INVALID_PLAYER_ID)
+			return
+		}
+		
+		var player_x = buffer_read(buffer, buffer_f16) // read coordinates
+		var player_y = buffer_read(buffer, buffer_f16) 
+		var player_rot = buffer_read(buffer, buffer_f16)
+		
+		var player = game.find_player(pl_id)
+		
+		// Update player position
+		if (player.hp > 0) { // check if player is alive
+			player.x = player_x
+			player.y = player_y
+			player.rotation = player_rot
+		}
+	}
+	
+	// notify server to broadcast player update
+	server.broadcast_player_update = true
 }

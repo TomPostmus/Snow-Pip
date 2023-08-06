@@ -45,6 +45,7 @@ function start_spawn_players() {
 		
 		player.x = spawn.x
 		player.y = spawn.y
+		player.rotation = irandom(360) // random rotation
 		
 		player.hp = 100
 	}

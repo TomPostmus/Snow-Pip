@@ -25,3 +25,13 @@ if (connect_state == "await_connection") {
 	
 	send_player_update() // send information of local players
 }
+
+// Game state
+if (game.state == GAME_STATE.GAME) {
+	// send movement updates
+	send_movement_timer --
+	if (send_movement_timer <= 0) {
+		send_movement_update() // send packet
+		send_movement_timer = send_movement_period // reset timer
+	}
+}

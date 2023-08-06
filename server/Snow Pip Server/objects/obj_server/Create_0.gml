@@ -5,9 +5,14 @@ game.server = self
 // Broadcasting flags
 broadcast_game_update = false
 broadcast_player_update = false
+broadcast_movement_update = false
 
 // Game state machine
 start_state = false
+
+// Broadcasting player movement timer
+broadcast_movement_period = 1 // after how many steps to send player movement to server
+broadcast_movement_timer = 0 // timer to send movement update
 
 // Open server
 port = 3929
@@ -92,6 +97,32 @@ function packgen_player_update() {
 	return buffer
 }
 
+// Generate movement update package
+function packgen_movement_update(player) {
+	// create buffer
+	var buffer = buffer_create(256, buffer_grow, 1)
+	buffer_seek(buffer, buffer_seek_start, 0)
+	buffer_write(buffer, buffer_u8, PACK.UPDATE_MOVEMENT)
+	
+	var nr_players = 0
+	with (obj_player) { // check how many are alive
+		if (hp > 0)	nr_players ++
+	}
+	
+	buffer_write(buffer, buffer_u8, nr_players) // write nr of alive players
+	
+	with (obj_player) { // write coordinates of live players
+		if (hp > 0) {
+			buffer_write(buffer, buffer_u8, player_id) // write player id
+			buffer_write(buffer, buffer_f16, x) // write coordinates (and rotation)
+			buffer_write(buffer, buffer_f16, y)
+			buffer_write(buffer, buffer_f16, rotation)
+		}
+	}
+	
+	return buffer
+}
+
 // Generate spawn package of player (at its x y coordinates)
 function packgen_spawn_player(player) {
 	// create buffer
@@ -102,6 +133,7 @@ function packgen_spawn_player(player) {
 	buffer_write(buffer, buffer_u8, player.player_id) // write player id
 	buffer_write(buffer, buffer_f16, player.x) // write player x coordinate
 	buffer_write(buffer, buffer_f16, player.y) // write player y coordinate
+	buffer_write(buffer, buffer_f16, player.rotation) // write player rotation
 	
 	return buffer
 }

@@ -20,27 +20,39 @@ if (state == GAME_STATE.LOBBY) {
 
 // Draw game state
 if (state == GAME_STATE.GAME) {
-		
+	
+	// Draw to GUI surface
+	surface_set_target(surface_gui)
+	draw_clear_alpha(c_black, 0) // flush surface
+	
 	// Draw player icons
 	draw_set_colour(c_red)
 	with (obj_player) {
-		draw_circle(x, y, 10, false)
+		var _x = other.gui_x(x)
+		var _y = other.gui_y(y)
+		draw_circle(_x, _y, 5, true)
+		draw_line(_x, _y,
+			_x + lengthdir_x(7, rotation), 
+			_y + lengthdir_y(7, rotation)
+		)
 	}
 	
+	surface_reset_target()
+	
+	// Draw to log surface
 	surface_set_target(surface_log)
 	
 	draw_clear(c_black)
 	
-	draw_set_color(c_white)
-	draw_text(20, 20, "The game is running...")
-	
 	// Draw player list
 	draw_set_colour(c_white)
+	draw_text(20, 20, "Players")
+	
 	var i = 0
 	with (obj_player) {
 		if (player_id != undefined) {
-			var str = name + ": " + string(player_id)
-			draw_text(20, 20 + i * 20, str)
+			var str = string(player_id) + ". " + name 
+			draw_text(20, 40 + i * 20, str)
 			i ++
 		}
 	}
@@ -52,3 +64,8 @@ if (state == GAME_STATE.GAME) {
 // Draw surfaces
 if (view_current == 1)
 	draw_surface(surface_log, 0, 0)
+	
+if (view_current == 0) {
+	draw_surface_stretched(surface_gui,
+		0, 0, room_width, room_height)
+}
