@@ -4,6 +4,8 @@ hmask_head.pip = self
 hmask_trunk = instance_create_layer(x, y, "Instances", obj_pip_hmask_trunk)
 hmask_trunk.pip = self
 
+input = noone // input inst to read input from
+
 // Animation vars
 rotation = 0					// facing rotation of pip
 walk_index = 0					// walk subimage index of trunk sprite
@@ -15,14 +17,7 @@ item_y = undefined				// undefined means holding nothing
 throw_strength = 0				// value from 0 to 1, how strongly to throw projectile
 
 // Input vars for animation
-input_axial = 0
-input_lateral = 0
-input_mb_left = 0 // hold left
-input_mb_left_press = 0
-input_mb_left_release = 0
-input_mb_right = 0 // hold right
-input_mb_right_press = 0
-input_mb_right_release = 0
+
 
 // Create projectile inst
 function throw_projectile(spin) {

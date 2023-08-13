@@ -1,6 +1,6 @@
-// Find player
-if (!instance_exists(player))
-	player = instance_find(obj_player_local, relative_player_id)
+if (local) {
+
+}
 
 // Listen for user input
 if (instance_exists(player.pip)) {

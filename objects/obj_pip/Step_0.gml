@@ -6,7 +6,7 @@ if (input_axial == 0) walk_index = 0
 if (arm_state == "hold") {
 	arm_index = 0
 	
-	if (input_mb_left_press || input_mb_right_press) {
+	if (input.mouse_left_press || input.mouse_right_press) {
 		arm_state = "brace"
 		arm_spr = spr_pip_arm_brace
 		throw_strength = 0 // reset throw strength
@@ -17,14 +17,14 @@ if (arm_state == "hold") {
 	
 	arm_index = throw_strength * 3
 	
-	if (input_mb_left_release) {
+	if (input.mouse_left_release) {
 		arm_state = "throw"
 		arm_spr = spr_pip_arm_throw
 		arm_index = 0
 		
 		throw_projectile(false)
 	}
-	if (input_mb_right_release) {
+	if (input.mouse_right_release) {
 		arm_state = "throw_spin"
 		arm_spr = spr_pip_arm_throw_spin
 		arm_index = 0
@@ -50,7 +50,7 @@ if (arm_state == "hold") {
 		arm_index = 0
 	}
 } else if (arm_state == "empty") {
-	if (input_mb_left_press || input_mb_right_press) {
+	if (input.mouse_left_press || input.mouse_right_press) {
 		arm_state = "pickup"
 		arm_spr = spr_pip_arm_pickup
 		arm_index = 0		
