@@ -43,7 +43,7 @@ function send_player_update() {
 	
 	// put id of each player and then info
 	with (obj_player_local) {
-		buffer_write(buffer, buffer_u8, player_id)
+		buffer_write(buffer, buffer_u8, playid)
 		buffer_write(buffer, buffer_string, name)
 	}
 	
@@ -65,13 +65,18 @@ function send_movement_update() {
 	buffer_write(buffer, buffer_u8, PACK.UPDATE_MOVEMENT)
 	buffer_write(buffer, buffer_u8, nr_players) // write nr of players
 	
-	// put id of each player and movement
+	// put id of each player and movement and input
 	with (obj_player_local) {
 		if (instance_exists(pip)) {
-			buffer_write(buffer, buffer_u8, player_id)
+			buffer_write(buffer, buffer_u8, playid)
 			buffer_write(buffer, buffer_f16, pip.collision.x)
 			buffer_write(buffer, buffer_f16, pip.collision.y)
 			buffer_write(buffer, buffer_f16, pip.rotation)
+			
+			buffer_write(buffer, buffer_bool, input.left) // write movement input
+			buffer_write(buffer, buffer_bool, input.right)
+			buffer_write(buffer, buffer_bool, input.forward)
+			buffer_write(buffer, buffer_bool, input.backward)
 		}
 	}
 	
@@ -163,19 +168,26 @@ function read_movement_update(buffer) {
 	// For each player update coordinates
 	for (var i = 0; i < nr; i ++) {
 		var pl_id = buffer_read(buffer, buffer_u8) // read player id from packet
-		var player_x = buffer_read(buffer, buffer_f16) // read coordinates
-		var player_y = buffer_read(buffer, buffer_f16) 
-		var player_rot = buffer_read(buffer, buffer_f16)
+		
+		var _x = buffer_read(buffer, buffer_f16) // read coordinates
+		var _y = buffer_read(buffer, buffer_f16) 
+		var _rot = buffer_read(buffer, buffer_f16)
+		
+		var _in_left = buffer_read(buffer, buffer_bool) // read movement input
+		var _in_right = buffer_read(buffer, buffer_bool)
+		var _in_forward = buffer_read(buffer, buffer_bool)
+		var _in_backward = buffer_read(buffer, buffer_bool)
 		
 		var player = game.find_player(pl_id)
 		
-		if (!player.local) { // only remote players are synchronized with server
-			with (player) {
-				next_position = true
-				next_x = player_x
-				next_y = player_y
-				next_rot = player_rot
-			}
+		with (player) {
+			received_x = _x
+			received_y = _y
+			received_rot = _rot
+			received_in_left = _in_left
+			received_in_right = _in_right
+			received_in_forward = _in_forward
+			received_in_backward = _in_backward
 		}
 	}
 }
@@ -184,11 +196,17 @@ function read_movement_update(buffer) {
 function read_spawn_player(buffer) {
 	var pl_id = buffer_read(buffer, buffer_u8) // read player id of player to spawn
 	
+	var _x = buffer_read(buffer, buffer_f16) // read coordinates
+	var _y = buffer_read(buffer, buffer_f16) 
+	var _rot = buffer_read(buffer, buffer_f16)
+	
 	var player = game.find_player(pl_id)
-	player.spawn = true
 	
 	// read spawn location
-	player.spawn_x = buffer_read(buffer, buffer_f16)
-	player.spawn_y = buffer_read(buffer, buffer_f16)
-	player.spawn_rotation = buffer_read(buffer, buffer_f16)
+	with (player) {
+		spawn = true
+		received_x = _x
+		received_y = _y
+		received_rot = _rot
+	}
 }

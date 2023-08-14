@@ -2,8 +2,8 @@
 state = undefined
 
 // Player id lists
-players = ds_list_create() // list of player_ids received by server
-local_players = ds_list_create() // list of this client's player_ids received by server
+players = ds_list_create() // list of playids received by server
+local_players = ds_list_create() // list of this client's playids received by server
 
 // Switch room based on game state
 function switch_room() {
@@ -18,9 +18,9 @@ function switch_room() {
 }
 
 // Find player based on player id
-function find_player(player_id) {
+function find_player(playid) {
 	with (obj_player) {
-		if (self.player_id == player_id)
+		if (self.playid == playid)
 			return self
 	}
 	
@@ -43,13 +43,13 @@ function update_player_list() {
 			player = instance_create_layer(0, 0,
 				"Instances", type)
 				
-			player.player_id = pl_id
+			player.playid = pl_id
 		}
 	}
 	
 	// remove left players
 	with (obj_player) {
-		if (ds_list_find_index(other.players, player_id) == -1) {
+		if (ds_list_find_index(other.players, playid) == -1) {
 			instance_destroy()
 		}
 	}

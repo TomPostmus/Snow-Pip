@@ -25,9 +25,9 @@ function read_hello(buffer) {
 		var player = instance_create_layer(0, 0,
 			"Instances", obj_player)
 			
-		player.player_id = game.unique_player_id() // get a unique id for this player
+		player.playid = game.unique_playid() // get a unique id for this player
 			
-		ds_list_add(client_players, player.player_id) // add new player to players list of current client connection		
+		ds_list_add(client_players, player.playid) // add new player to players list of current client connection		
 	}
 	
 	send_hello() // immediately respond
@@ -63,15 +63,16 @@ function read_player_update(buffer) {
 	// read player names from packet and set information
 	for (var i = 0; i < nr; i ++) {
 		var pl_id = buffer_read(buffer, buffer_u8)
+		var name = buffer_read(buffer, buffer_string)
 		
 		if (ds_list_find_index(client_players, pl_id) == -1) { // check if player belongs to client
-			send_error(NETWORK_ERROR.INVALID_PLAYER_ID)
+			send_error(NETWORK_ERROR.INVALID_playid)
 			return
 		}
 		
 		var player = game.find_player(pl_id)
 		
-		player.name = buffer_read(buffer, buffer_string)
+		player.name = name
 	}
 	
 	// notify server to broadcast player update
@@ -89,7 +90,7 @@ function send_movement_update() {
 	
 	//// put info of each player
 	//with (obj_player) {
-	//	buffer_write(buffer, buffer_u8, player_id)
+	//	buffer_write(buffer, buffer_u8, playid)
 	//	buffer_write(buffer, buffer_string, name)
 	//}
 }
@@ -115,25 +116,31 @@ function read_movement_update(buffer) {
 	for (var i = 0; i < nr; i ++) {
 		var pl_id = buffer_read(buffer, buffer_u8) // read player id
 		
+		var _x = buffer_read(buffer, buffer_f16) // read coordinates
+		var _y = buffer_read(buffer, buffer_f16) 
+		var _rot = buffer_read(buffer, buffer_f16)
+		
+		var _in_left = buffer_read(buffer, buffer_bool) // read movement input
+		var _in_right = buffer_read(buffer, buffer_bool)
+		var _in_forward = buffer_read(buffer, buffer_bool)
+		var _in_backward = buffer_read(buffer, buffer_bool)
+		
 		if (ds_list_find_index(client_players, pl_id) == -1) { // check if player belongs to client
-			send_error(NETWORK_ERROR.INVALID_PLAYER_ID)
+			send_error(NETWORK_ERROR.INVALID_playid)
 			return
 		}
-		
-		var player_x = buffer_read(buffer, buffer_f16) // read coordinates
-		var player_y = buffer_read(buffer, buffer_f16) 
-		var player_rot = buffer_read(buffer, buffer_f16)
 		
 		var player = game.find_player(pl_id)
 		
 		// Update player position
 		if (player.hp > 0) { // check if player is alive
-			player.x = player_x
-			player.y = player_y
-			player.rotation = player_rot
+			player.x = _x
+			player.y = _y
+			player.rotation = _rot
+			player.in_left = _in_left
+			player.in_right = _in_right
+			player.in_forward = _in_forward
+			player.in_backward = _in_backward
 		}
 	}
-	
-	// notify server to broadcast player update
-	server.broadcast_player_update = true
 }

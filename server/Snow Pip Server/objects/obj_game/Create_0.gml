@@ -4,9 +4,9 @@ state = GAME_STATE.LOBBY
 respawn_time = 300 // how many steps to wait for respawn
 
 // Find player based on player id
-function find_player(player_id) {
+function find_player(playid) {
 	with (obj_player) {
-		if (self.player_id == player_id)
+		if (self.playid == playid)
 			return self
 	}
 	
@@ -14,13 +14,13 @@ function find_player(player_id) {
 }
 
 // Get unique list of players
-function unique_player_id() {
-	var player_ids = player_id_list()
+function unique_playid() {
+	var playids = playid_list()
 	
 	// Try to find new player id
 	var new_id = 0
 	while (ds_list_find_index(
-			player_ids, new_id) != -1) {
+			playids, new_id) != -1) {
 		new_id ++
 	}
 		
@@ -28,13 +28,13 @@ function unique_player_id() {
 }
 
 // Return list of player ids
-function player_id_list() {
-	var player_ids = ds_list_create()
+function playid_list() {
+	var playids = ds_list_create()
 	
 	with (obj_player)
-		ds_list_add(player_ids, player_id)
+		ds_list_add(playids, playid)
 	
-	return player_ids
+	return playids
 }
 
 // Spawn players at start spawns

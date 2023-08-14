@@ -10,8 +10,8 @@ if (state == GAME_STATE.LOBBY) {
 
 	var i = 0
 	with (obj_player) {
-		if (player_id != undefined) {
-			var str = name + ": " + string(player_id)
+		if (playid != undefined) {
+			var str = name + ": " + string(playid)
 			draw_text(20, 40 + i * 20, str)
 			i ++
 		}
@@ -28,13 +28,15 @@ if (state == GAME_STATE.GAME) {
 	// Draw player icons
 	draw_set_colour(c_red)
 	with (obj_player) {
-		var _x = other.gui_x(x)
-		var _y = other.gui_y(y)
-		draw_circle(_x, _y, 5, true)
-		draw_line(_x, _y,
-			_x + lengthdir_x(7, rotation), 
-			_y + lengthdir_y(7, rotation)
-		)
+		if (hp > 0) { // check if alive
+			var _x = other.gui_x(x)
+			var _y = other.gui_y(y)
+			draw_circle(_x, _y, 5, true)
+			draw_line(_x, _y,
+				_x + lengthdir_x(7, rotation), 
+				_y + lengthdir_y(7, rotation)
+			)
+		}
 	}
 	
 	surface_reset_target()
@@ -50,8 +52,8 @@ if (state == GAME_STATE.GAME) {
 	
 	var i = 0
 	with (obj_player) {
-		if (player_id != undefined) {
-			var str = string(player_id) + ". " + name 
+		if (playid != undefined) {
+			var str = string(playid) + ". " + name 
 			draw_text(20, 40 + i * 20, str)
 			i ++
 		}

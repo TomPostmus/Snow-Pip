@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Networking",
-    "path": "folders/Networking.yy",
+    "name": "Pip",
+    "path": "folders/Pip.yy",
   },
   "parentObjectId": null,
   "persistent": true,

@@ -14,5 +14,5 @@ enum GAME_STATE {
 }
 
 enum NETWORK_ERROR {
-	INVALID_PLAYER_ID
+	INVALID_playid
 }

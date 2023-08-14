@@ -73,7 +73,7 @@ function packgen_game_update() {
 	
 	// put id of each player
 	with (obj_player) {
-		buffer_write(buffer, buffer_u8, player_id)
+		buffer_write(buffer, buffer_u8, playid)
 	}
 	
 	return buffer
@@ -90,7 +90,7 @@ function packgen_player_update() {
 	
 	// put id of each player and then info
 	with (obj_player) {
-		buffer_write(buffer, buffer_u8, player_id)
+		buffer_write(buffer, buffer_u8, playid)
 		buffer_write(buffer, buffer_string, name)
 	}
 	
@@ -113,10 +113,15 @@ function packgen_movement_update(player) {
 	
 	with (obj_player) { // write coordinates of live players
 		if (hp > 0) {
-			buffer_write(buffer, buffer_u8, player_id) // write player id
+			buffer_write(buffer, buffer_u8, playid) // write player id
 			buffer_write(buffer, buffer_f16, x) // write coordinates (and rotation)
 			buffer_write(buffer, buffer_f16, y)
 			buffer_write(buffer, buffer_f16, rotation)
+			
+			buffer_write(buffer, buffer_bool, in_left) // write movement input
+			buffer_write(buffer, buffer_bool, in_right)
+			buffer_write(buffer, buffer_bool, in_forward)
+			buffer_write(buffer, buffer_bool, in_backward)
 		}
 	}
 	
@@ -130,7 +135,7 @@ function packgen_spawn_player(player) {
 	buffer_seek(buffer, buffer_seek_start, 0)
 	buffer_write(buffer, buffer_u8, PACK.SPAWN_PLAYER)
 	
-	buffer_write(buffer, buffer_u8, player.player_id) // write player id
+	buffer_write(buffer, buffer_u8, player.playid) // write player id
 	buffer_write(buffer, buffer_f16, player.x) // write player x coordinate
 	buffer_write(buffer, buffer_f16, player.y) // write player y coordinate
 	buffer_write(buffer, buffer_f16, player.rotation) // write player rotation

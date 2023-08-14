@@ -4,20 +4,15 @@ if (spawn) {
 		if (instance_exists(pip)) // in case of respawn
 			instance_destroy(pip)
 		
-		pip = instance_create_layer(spawn_x, spawn_y,
+		pip = instance_create_layer(received_x, received_y,
 			"Instances", obj_pip)
-		pip.rotation = spawn_rotation
+		pip.rotation = received_rot
+		
+		pip.player = self
+		pip.input = input
+		
+		hp = 100 // set hp to full
 		
 		spawn = false // reset flag
 	}
-}
-
-// Update position (received from server)
-if (next_position) {
-	if (instance_exists(pip)) { // check that player is still alive
-		pip.collision.phy_position_x = next_x
-		pip.collision.phy_position_y = next_y
-		pip.rotation = next_rot
-	}
-	next_position = false // reset flag
 }

@@ -1,6 +1,9 @@
 // Walk animation
-walk_index += input_axial * 0.5
-if (input_axial == 0) walk_index = 0
+move_axial = input.forward - input.backward
+move_lateral = input.left - input.right
+
+walk_index += move_axial * 0.5
+if (move_axial == 0) walk_index = 0
 
 // Arms animation and functionality
 if (arm_state == "hold") {
@@ -68,3 +71,37 @@ if (arm_state == "hold") {
 
 // Update item pos in hand
 update_item_pos()
+
+// Move from local input
+if (player.local) {
+	// Translational movement
+	var _disp_axial = (input.forward * 1.7 - input.backward * 1.2)
+		* !(input.forward && input.backward) // if both forward & backward are pressed, movement is zero
+	var _disp_lateral = (input.left - input.right) * 0.8
+	
+	collision.phy_position_x += 
+		lengthdir_x(_disp_axial, rotation) +
+		lengthdir_x(_disp_lateral, rotation + 90)
+	collision.phy_position_y += 
+		lengthdir_y(_disp_axial, rotation) +
+		lengthdir_y(_disp_lateral, rotation + 90)
+		
+	// Mouse turning movement
+	var _disp_x = window_mouse_get_x() - window_get_width()/2	// x displacement of mouse
+	window_mouse_set(window_get_width()/2, window_get_height()/2)
+	window_set_cursor(cr_none) // remove cursor from screen
+	
+	var _sensitivity = 0.8
+	var _max_disp_rotation = 20					// maximum rotation displacement each time step
+	var _disp_rotation = clamp(-_disp_x * _sensitivity,
+		-_max_disp_rotation, _max_disp_rotation)
+		
+	rotation += _disp_rotation				// update rotation
+}
+
+// Move from server input
+if (!player.local) {
+	collision.phy_position_x = player.received_x
+	collision.phy_position_y = player.received_y
+	rotation = player.received_rot
+}

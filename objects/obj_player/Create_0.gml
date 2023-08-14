@@ -1,17 +1,26 @@
+// Player attributes
 local = false
 name = ""
-player_id = -1 // id of player within current server session
+playid = -1 // id of player within current server session
 
 pip = noone // pip inst of current player
 
+input = instance_create_layer(0, 0, "Instances", obj_input)
+input.player = self
+
+// Hp
+hp = 0
+
 // Spawn flag
 spawn = false // whether to spawn player (set from async network event)
-spawn_x = 0 // location where to spawn
-spawn_y = 0
-spawn_rotation = 0
 
-// Next position (received from server)
-next_position = false // whether next pos has been received
-next_x = 0 // next position
-next_y = 0
-next_rot = 0
+// Received position from server, used for spawning player as well as updating position
+received_x = 0
+received_y = 0
+received_rot = 0
+
+// Received input from server
+received_in_left = false
+received_in_right = false
+received_in_forward = false
+received_in_backward = false
