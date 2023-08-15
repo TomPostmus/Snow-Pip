@@ -24,3 +24,6 @@ received_in_left = false
 received_in_right = false
 received_in_forward = false
 received_in_backward = false
+
+// Received arms animation state from server
+received_arm_state = ANIM_STATE.EMPTY

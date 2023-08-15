@@ -14,6 +14,15 @@ if (broadcast_movement_update) {
 		packgen_movement_update()
 	)
 }
+for (var i = 0; i < ds_list_size(broadcast_anim_update); i ++) {
+	var _client_connection = broadcast_anim_update[|i][0]
+	var _player = broadcast_anim_update[|i][1]
+	
+	broadcast_packet(
+		packgen_animation_update(_player),
+		_client_connection			// except client connection from broadcast
+	)
+}
 
 // Reset flags
 broadcast_game_update = false

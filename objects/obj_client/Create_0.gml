@@ -55,7 +55,7 @@ function send_player_update() {
 	buffer_delete(_buffer)
 }
 
-// Send player movement packet
+// Send player movement packet containing movement info of local players
 function send_movement_update() {
 	// nr of players that are alive
 	var nr_players = 0
@@ -88,23 +88,17 @@ function send_movement_update() {
 	buffer_delete(_buffer)
 }
 
-// Read packet from server (called from async networking event)
-function read_packet(_buffer) {
-	var type = buffer_read(_buffer, buffer_u8)
-	//if (connected) {
-		switch (type) {
-			case PACK.HELLO: read_hello(_buffer); break;
-			case PACK.UPDATE_GAME: read_game_update(_buffer); break;
-			case PACK.UPDATE_PLAYER: read_player_update(_buffer) break;
-			case PACK.UPDATE_MOVEMENT: read_movement_update(_buffer) break;
-			case PACK.SPAWN_PLAYER: read_spawn_player(_buffer) break;
-		}
-	//} else { // if still in connection state machine, we do not act on other packets
-	//	switch (type) {
-	//		case PACK.HELLO: read_hello(_buffer); break;
-	//		case PACK.UPDATE_GAME: read_game_update(_buffer); break;
-	//	}
-	//}
+// Send animation update packet of player
+function send_animation_update(_player) {
+	var _buffer = buffer_create(256, buffer_grow, 1)
+	buffer_seek(_buffer, buffer_seek_start, 0)
+	buffer_write(_buffer, buffer_u8, PACK.UPDATE_ANIM)
+	
+	buffer_write(_buffer, buffer_u8, _player.playid)			// write playid
+	buffer_write(_buffer, buffer_u8, _player.pip.arm_state)		// write animation state
+	
+	network_send_packet(socket, _buffer, buffer_get_size(_buffer))
+	buffer_delete(_buffer)
 }
 
 // Read HELLO response from server
@@ -206,6 +200,21 @@ function read_spawn_player(_buffer) {
 		received_x = _x
 		received_y = _y
 		received_rot = _rot
+	}
+	
+	buffer_delete(_buffer)								// delete buffer
+}
+
+// Read animation update
+function read_animation_update(_buffer) {
+	var _pl_id = buffer_read(_buffer, buffer_u8)		// read player id of player to spawn
+	var _arm_state = buffer_read(_buffer, buffer_u8)	// read new arms animation state
+	
+	var _player = game.find_player(_pl_id)
+	
+	// update state
+	with (_player) {
+		received_arm_state = _arm_state
 	}
 	
 	buffer_delete(_buffer)								// delete buffer

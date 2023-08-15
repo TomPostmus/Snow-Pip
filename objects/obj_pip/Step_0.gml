@@ -5,68 +5,49 @@ move_lateral = input.left - input.right
 walk_index += move_axial * 0.5
 if (move_axial == 0) walk_index = 0
 
-// Arms animation and functionality
-if (arm_state == "hold") {
+// Arms states animation
+if (arm_state == ANIM_STATE.HOLD) {
 	arm_index = 0
+	arm_spr = spr_pip_arm_hold
 	
-	if (input.mouse_left_press || input.mouse_right_press) {
-		arm_state = "brace"
-		arm_spr = spr_pip_arm_brace
-		throw_strength = 0 // reset throw strength
-	}
-} if (arm_state == "brace") {					// no elseif for immediate response
+} else if (arm_state == ANIM_STATE.BRACE) {
+	if (arm_state_changed)						// start of state
+		throw_strength = 0						// reset throw strength
+		
 	throw_strength += 0.02						// increase throw strength
 	throw_strength = min(throw_strength, 1)		// cap at 1
 	
+	arm_spr = spr_pip_arm_brace
 	arm_index = throw_strength * 3
 	
-	if (input.mouse_left_release) {
-		arm_state = "throw"
-		arm_spr = spr_pip_arm_throw
-		arm_index = 0
+} else if (arm_state == ANIM_STATE.THROW) {
+	if (arm_state_changed)						// start of state
+		arm_index = 0							// reset arm index
 		
-		throw_projectile(false)
-	}
-	if (input.mouse_right_release) {
-		arm_state = "throw_spin"
-		arm_spr = spr_pip_arm_throw_spin
-		arm_index = 0
+	var t = 0.7
+	arm_index += t								// advance animation
+	arm_spr = spr_pip_arm_throw
+	
+} else if (arm_state == ANIM_STATE.THROW_SPIN) {
+	if (arm_state_changed)						// start of state
+		arm_index = 0							// reset arm index
 		
-		throw_projectile(true)
-	}
-} else if (arm_state == "throw") {
 	var t = 0.7
-	arm_index += t
+	arm_index += t								// advance animation
+	arm_spr = spr_pip_arm_throw_spin
 	
-	if (arm_index > sprite_get_number(arm_spr)-t) {
-		arm_state = "empty"
-		arm_spr = undefined // no sprite
-		arm_index = 0
-	}
-} else if (arm_state == "throw_spin") {
-	var t = 0.7
-	arm_index += t
+} else if (arm_state == ANIM_STATE.EMPTY) {
+	arm_index = 0
+	arm_spr = undefined							// no sprite
 	
-	if (arm_index > sprite_get_number(arm_spr)-t) {
-		arm_state = "empty"
-		arm_spr = undefined // no sprite
-		arm_index = 0
-	}
-} else if (arm_state == "empty") {
-	if (input.mouse_left_press || input.mouse_right_press) {
-		arm_state = "pickup"
-		arm_spr = spr_pip_arm_pickup
-		arm_index = 0		
-	}
-} else if (arm_state == "pickup") {
+} else if (arm_state == ANIM_STATE.PICKUP) {
+	if (arm_state_changed)						// start of state
+		arm_index = 0							// reset arm index
+		
 	var t = 0.5
-	arm_index += t
+	arm_index += t								// advance animation
+	arm_spr = spr_pip_arm_pickup
 	
-	if (arm_index > sprite_get_number(arm_spr)-t) {
-		arm_state = "hold"
-		arm_spr = spr_pip_arm_hold
-		arm_index = 0
-	}
 }
 
 // Update item pos in hand
@@ -105,4 +86,52 @@ if (!player.local) {
 	collision.phy_position_x = player.received_x
 	collision.phy_position_y = player.received_y
 	rotation = player.received_rot
+}
+
+// Change arm state from local input
+if (player.local) {
+	var _prev_state = arm_state
+	if (arm_state == ANIM_STATE.HOLD) {	
+		if (input.mouse_left_press || input.mouse_right_press)
+			arm_state = ANIM_STATE.BRACE
+		
+	} if (arm_state == ANIM_STATE.BRACE) { // no else if for immediate response
+		if (input.mouse_left_release) {
+			arm_state = ANIM_STATE.THROW
+			throw_projectile(false)
+		}
+		if (input.mouse_right_release) {
+			arm_state = ANIM_STATE.THROW_SPIN		
+			throw_projectile(true)
+		}
+	} else if (arm_state == ANIM_STATE.THROW) {
+		if (arm_index > sprite_get_number(arm_spr)-1)
+			arm_state = ANIM_STATE.EMPTY
+		
+	} else if (arm_state == ANIM_STATE.THROW_SPIN) {
+		if (arm_index > sprite_get_number(arm_spr)-1)
+			arm_state = ANIM_STATE.EMPTY
+		
+	} else if (arm_state == ANIM_STATE.EMPTY) {
+		if (input.mouse_left_press || input.mouse_right_press)
+			arm_state = ANIM_STATE.PICKUP
+	
+	} else if (arm_state == ANIM_STATE.PICKUP) {
+		if (arm_index > sprite_get_number(arm_spr)-1) 
+			arm_state = ANIM_STATE.HOLD
+		
+	}
+	
+	// Check if state changed
+	arm_state_changed = (_prev_state != arm_state)
+}
+
+// Change arm state from server input
+if (!player.local) {
+	// Update state
+	var _prev_state = arm_state
+	arm_state = player.received_arm_state
+	
+	// Check if state changed
+	arm_state_changed = (_prev_state != arm_state)
 }

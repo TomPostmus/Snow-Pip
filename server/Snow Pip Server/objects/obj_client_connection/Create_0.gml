@@ -7,6 +7,7 @@ function read_packet(buffer) {
 		case PACK.HELLO: read_hello(buffer); break
 		case PACK.UPDATE_PLAYER: read_player_update(buffer); break
 		case PACK.UPDATE_MOVEMENT: read_movement_update(buffer); break
+		case PACK.UPDATE_ANIM: read_animation_update(buffer); break
 	}
 }
 
@@ -85,7 +86,7 @@ function read_player_update(buffer) {
 		var name = buffer_read(buffer, buffer_string)
 		
 		if (ds_list_find_index(client_players, pl_id) == -1) { // check if player belongs to client
-			send_error(NETWORK_ERROR.INVALID_playid)
+			send_error(NETWORK_ERROR.INVALID_PLAYID)
 			return
 		}
 		
@@ -145,7 +146,7 @@ function read_movement_update(buffer) {
 		var _in_backward = buffer_read(buffer, buffer_bool)
 		
 		if (ds_list_find_index(client_players, pl_id) == -1) { // check if player belongs to client
-			send_error(NETWORK_ERROR.INVALID_playid)
+			send_error(NETWORK_ERROR.INVALID_PLAYID)
 			return
 		}
 		
@@ -162,4 +163,17 @@ function read_movement_update(buffer) {
 			player.in_backward = _in_backward
 		}
 	}
+}
+
+// Read animation update packet
+function read_animation_update(_buffer) {
+	var _pl_id = buffer_read(_buffer, buffer_u8)				// read player id
+	var _arm_state = buffer_read(_buffer, buffer_u8)			// read animation state
+
+	var _player = game.find_player(_pl_id)
+	
+	_player.arm_state = _arm_state
+	
+	// notify server to broadcast animation update
+	ds_list_add(server.broadcast_anim_update, [self, _player])	// put tuple of this client connection and player in question
 }

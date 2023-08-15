@@ -25,7 +25,7 @@ if (player.local) {
 				
 		// Mouse turning movement
 		if (MultiClientGetID() == 0 && // TEMPORARY, only first client gets mouse input (otherwise it gets annoying with multiple clients)
-		(!obj_init_graphics.full_screen && window_has_focus())) { 
+		(!obj_init_graphics.full_screen && window_has_focus())) {
 			mouse_move_h = window_mouse_get_x()
 				- window_get_width()/2					// horizontal displacement of mouse
 			window_mouse_set(window_get_width()/2,

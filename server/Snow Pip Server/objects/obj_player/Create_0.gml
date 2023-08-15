@@ -5,6 +5,9 @@ playid = -1
 hp = 0
 respawn_timer = 0		// timer for respawning (count-down, 0 means timer elapsed)
 
+// Arms animation state
+arm_state = ANIM_STATE.EMPTY
+
 // Movement vars
 x = 0
 y = 0

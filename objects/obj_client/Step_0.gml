@@ -62,6 +62,10 @@ if (connect_state == "await_hello") {					// if in await hello state, look speci
 					read_spawn_player(_packet) 
 					ds_list_delete(packets, i); i--				// pop packet from queue
 				break;
+				case PACK.UPDATE_ANIM: 
+					read_animation_update(_packet) 
+					ds_list_delete(packets, i); i--				// pop packet from queue
+				break;
 			}
 		}
 	}
@@ -94,5 +98,14 @@ if (game.state == GAME_STATE.GAME) {
 	if (send_movement_timer <= 0) {
 		send_movement_update() // send packet
 		send_movement_timer = send_movement_period // reset timer
+	}
+	
+	// Send arms animation update
+	var _method = send_animation_update
+	with (obj_player_local) {
+		with (pip) {
+			if (arm_state_changed)
+				_method(other) // call animation update packet function on player
+		}
 	}
 }

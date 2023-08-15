@@ -16,7 +16,8 @@ move_lateral = 0				// indicates movement on lateral axis (-1 right, 1 left)
 // Arms animation vars
 arm_spr = spr_pip_arm_hold		// spr index of arm(s)
 arm_index = 0					// subimage index of arm sprite
-arm_state = "hold"				// anim state of arm
+arm_state = ANIM_STATE.EMPTY	// anim state of arm
+arm_state_changed = false		// whether state of the arm has changed in current step
 item_x = undefined				// relative position of holding item
 item_y = undefined				// undefined means holding nothing
 throw_strength = 0				// value from 0 to 1, how strongly to throw projectile

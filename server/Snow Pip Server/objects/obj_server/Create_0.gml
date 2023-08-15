@@ -6,6 +6,8 @@ game.server = self
 broadcast_game_update = false
 broadcast_player_update = false
 broadcast_movement_update = false
+broadcast_anim_update = ds_list_create() // list of clients of which we want to broadcast arms animation update
+
 catch_up_clients = ds_list_create() // list of clients that we want to catch up with next step (set from async event)
 
 // Game state machine
@@ -53,8 +55,11 @@ function incoming_tcp_data(client_socket, buffer) {
 
 // Broadcast packet to all client connections
 function broadcast_packet(buffer) {
+	var _except = argument[1]	// optional argument, used for excepting a client connection from broadcast
+	
 	with (obj_client_connection) {
-		network_send_packet(socket, buffer, buffer_get_size(buffer))
+		if (is_undefined(_except) || _except != self) // check if this client connection is exception
+			network_send_packet(socket, buffer, buffer_get_size(buffer))
 	}
 	buffer_delete(buffer)
 }
@@ -141,4 +146,17 @@ function packgen_spawn_player(player) {
 	buffer_write(buffer, buffer_f16, player.rotation) // write player rotation
 	
 	return buffer
+}
+
+// Generate animation update packet of player
+function packgen_animation_update(_player) {
+	// create buffer
+	var _buffer = buffer_create(256, buffer_grow, 1)
+	buffer_seek(_buffer, buffer_seek_start, 0)
+	buffer_write(_buffer, buffer_u8, PACK.UPDATE_ANIM)
+	
+	buffer_write(_buffer, buffer_u8, _player.playid)			// write playid
+	buffer_write(_buffer, buffer_u8, _player.arm_state)			// write animation state
+	
+	return _buffer
 }
