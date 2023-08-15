@@ -7,6 +7,7 @@ forward = 0
 backward = 0
 
 // Mouse input
+mouse_move_h = 0 // how much mouse movement over horizontal axis in current step
 mouse_left = 0 // hold left
 mouse_left_press = 0
 mouse_left_release = 0

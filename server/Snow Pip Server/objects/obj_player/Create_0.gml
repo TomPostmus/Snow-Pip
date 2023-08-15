@@ -3,7 +3,7 @@ name = "new_player"
 playid = -1
 
 hp = 0
-respawn_timer = 0
+respawn_timer = 0		// timer for respawning (count-down, 0 means timer elapsed)
 
 // Movement vars
 x = 0

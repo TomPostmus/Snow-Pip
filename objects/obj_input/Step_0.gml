@@ -21,7 +21,17 @@ if (player.local) {
 	
 		mouse_right = mouse_check_button(mb_right)
 		mouse_right_press = mouse_check_button_pressed(mb_right)
-		mouse_right_release = mouse_check_button_released(mb_right)	
+		mouse_right_release = mouse_check_button_released(mb_right)
+				
+		// Mouse turning movement
+		if (MultiClientGetID() == 0 && // TEMPORARY, only first client gets mouse input (otherwise it gets annoying with multiple clients)
+		(!obj_init_graphics.full_screen && window_has_focus())) { 
+			mouse_move_h = window_mouse_get_x()
+				- window_get_width()/2					// horizontal displacement of mouse
+			window_mouse_set(window_get_width()/2,
+				window_get_height()/2)					// reset mouse position
+			//window_set_cursor(cr_none)					// remove cursor from screen			
+		}
 	} else if (_relative_playid == 1) {
 		left = keyboard_check(vk_left)
 		right = keyboard_check(vk_right)

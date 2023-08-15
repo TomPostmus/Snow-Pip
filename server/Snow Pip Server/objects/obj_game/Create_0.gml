@@ -51,6 +51,27 @@ function start_spawn_players() {
 	}
 }
 
+// Find a free spawn and spawn a given player there
 function spawn_at_free_spawn(player) {
-
+	var spawns = ds_list_create()
+	with (obj_spawn) ds_list_add(spawns, self)			// build list of spawns
+	
+	ds_list_shuffle(spawns)								// shuffle so loop through list in random order
+	for (var i = 0; i < ds_list_size(spawns); i ++) {
+		var spawn = spawns[|i]
+		
+		//if (spawn free) {// TODO implement
+		
+		player.x = spawn.x
+		player.y = spawn.y
+		player.rotation = irandom(360) // random rotation
+		
+		player.hp = 100
+		
+		return true										// return true, i.e. free spawn found
+		
+		// }
+	}
+	
+	return false										// if no free spawn found, return false
 }

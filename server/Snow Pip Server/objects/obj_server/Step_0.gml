@@ -20,6 +20,14 @@ broadcast_game_update = false
 broadcast_player_update = false
 broadcast_movement_update = false
 
+// Catch up with new clients
+for (var i = 0; i < ds_list_size(catch_up_clients); i ++) {
+	var client_connection = catch_up_clients[|i]
+	
+	with (client_connection) catch_up()
+}
+ds_list_clear(catch_up_clients) // clear list
+
 // Lobby state
 if (game.state == GAME_STATE.LOBBY) {
 	// switch to game state
@@ -42,6 +50,20 @@ if (game.state == GAME_STATE.LOBBY) {
 			other.broadcast_packet(
 				other.packgen_spawn_player(self)
 			)
+		}
+	}
+	
+	// Mid-game spawn/respawn
+	with (obj_player) {
+		if (hp <= 0) {										// check if dead
+			respawn_timer --								// count down respawn timer
+			if (respawn_timer <= 0) {						// check if respawn timer has elapsed
+				if (other.game.spawn_at_free_spawn(self)) {	// spawn at free spawn (if that succeeds, i.e. there is a free spawn)
+					other.broadcast_packet(					// broadcast player spawn
+						other.packgen_spawn_player(self)
+					
+				); show_debug_message("Spawned " + name)}
+			}
 		}
 	}
 	

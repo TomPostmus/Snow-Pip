@@ -16,6 +16,22 @@ function send_packet(buffer) {
 	buffer_delete(buffer)
 }
 
+// Send client all cath-up information about game (game-state, alive players etc.)
+function catch_up() {
+	// Send game update
+	send_packet(server.packgen_game_update())	// send game update
+		
+	if (game.state == GAME_STATE.GAME) {
+		// Send alive players
+		with (obj_player) {
+			if (hp > 0) {
+				other.send_packet(		// send spawn player packet
+					other.server.packgen_spawn_player(self))
+			}
+		}
+	}
+}
+
 // Read packet of type HELLO
 function read_hello(buffer) {
 	var nr = buffer_read(buffer, buffer_u8) // nr of new players from client
@@ -31,6 +47,9 @@ function read_hello(buffer) {
 	}
 	
 	send_hello() // immediately respond
+	
+	// notify server that we want to catch up with client (this is not done here (in Async event) due to concurrency issues)
+	ds_list_add(server.catch_up_clients, self)
 	
 	// notify server to broadcast game update (containing info of new players)
 	server.broadcast_game_update = true

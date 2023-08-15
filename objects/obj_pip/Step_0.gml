@@ -75,28 +75,29 @@ update_item_pos()
 // Move from local input
 if (player.local) {
 	// Translational movement
-	var _disp_axial = (input.forward * 1.7 - input.backward * 1.2)
-		* !(input.forward && input.backward) // if both forward & backward are pressed, movement is zero
-	var _disp_lateral = (input.left - input.right) * 0.8
+	var _disp_axial, _disp_lateral					// translational displacement on axial and lateral axes
+	_disp_axial =
+		(input.forward * 1.7 - input.backward * 1.2)// slightly slower backwards speed than forwards
+		* !(input.forward && input.backward)		// if both forward & backward are pressed, movement is zero
+	_disp_lateral = (input.left - input.right) * 0.8
 	
-	collision.phy_position_x += 
+	collision.phy_position_x +=						// update position
 		lengthdir_x(_disp_axial, rotation) +
 		lengthdir_x(_disp_lateral, rotation + 90)
 	collision.phy_position_y += 
 		lengthdir_y(_disp_axial, rotation) +
 		lengthdir_y(_disp_lateral, rotation + 90)
-		
-	// Mouse turning movement
-	var _disp_x = window_mouse_get_x() - window_get_width()/2	// x displacement of mouse
-	window_mouse_set(window_get_width()/2, window_get_height()/2)
-	window_set_cursor(cr_none) // remove cursor from screen
 	
-	var _sensitivity = 0.8
-	var _max_disp_rotation = 20					// maximum rotation displacement each time step
-	var _disp_rotation = clamp(-_disp_x * _sensitivity,
+	// Rotation movement from mouse
+	var _sensitivity = 0.8							// sensitivity of rotational movement
+	var _max_disp_rotation = 20						// maximum rotation displacement each time step
+	var _disp_rot									// rotational displacement
+	
+	_disp_rot = -input.mouse_move_h * _sensitivity	// multiply with sensitivity
+	_disp_rot = clamp(_disp_rot,					// clamp rotation
 		-_max_disp_rotation, _max_disp_rotation)
 		
-	rotation += _disp_rotation				// update rotation
+	rotation += _disp_rot							// update rotation
 }
 
 // Move from server input

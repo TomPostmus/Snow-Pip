@@ -6,6 +6,7 @@ game.server = self
 broadcast_game_update = false
 broadcast_player_update = false
 broadcast_movement_update = false
+catch_up_clients = ds_list_create() // list of clients that we want to catch up with next step (set from async event)
 
 // Game state machine
 start_state = false
@@ -57,7 +58,6 @@ function broadcast_packet(buffer) {
 	}
 	buffer_delete(buffer)
 }
-
 
 // Server packet generators //
 
