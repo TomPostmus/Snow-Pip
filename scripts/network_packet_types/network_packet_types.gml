@@ -5,6 +5,7 @@ enum PACK {
 	UPDATE_MOVEMENT,		// update containing movement from players (realtime), both server and client
 	UPDATE_ANIM,			// update animation state of player
 	SPAWN_PLAYER,			// spawn player at location
+	PROJECTILE,				// created projectile at a location with speed
 	
 	ERROR					// server error
 }

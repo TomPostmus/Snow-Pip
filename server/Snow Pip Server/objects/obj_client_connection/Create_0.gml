@@ -8,6 +8,7 @@ function read_packet(buffer) {
 		case PACK.UPDATE_PLAYER: read_player_update(buffer); break
 		case PACK.UPDATE_MOVEMENT: read_movement_update(buffer); break
 		case PACK.UPDATE_ANIM: read_animation_update(buffer); break
+		case PACK.PROJECTILE: read_projectile_creation(buffer); break
 	}
 }
 
@@ -176,4 +177,30 @@ function read_animation_update(_buffer) {
 	
 	// notify server to broadcast animation update
 	ds_list_add(server.broadcast_anim_update, [self, _player])	// put tuple of this client connection and player in question
+}
+
+// Read projectile creation packet
+function read_projectile_creation(_buffer) {
+	var _pl_id = buffer_read(_buffer, buffer_u8)				// read player id
+	
+	var _x = buffer_read(_buffer, buffer_f16)
+	var _y = buffer_read(_buffer, buffer_f16)
+	var _speed_x = buffer_read(_buffer, buffer_f16)
+	var _speed_y = buffer_read(_buffer, buffer_f16)
+	var _spin = buffer_read(_buffer, buffer_bool)
+	var _type = buffer_read(_buffer, buffer_u8)
+	
+	var _projectile = instance_create_layer(					// create projectile
+		_x, _y, "Instances", obj_projectile
+	)
+	
+	_projectile.playid = _pl_id									// assign playid
+	
+	_projectile.speed_x = _speed_x								// assign other properties
+	_projectile.speed_y = _speed_y
+	_projectile.spin = _spin
+	_projectile.type = _type
+	
+	// notify server to broadcast projectile creation
+	ds_list_add(server.broadcast_projectiles, [self, _projectile])
 }

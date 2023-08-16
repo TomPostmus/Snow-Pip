@@ -66,6 +66,10 @@ if (connect_state == "await_hello") {					// if in await hello state, look speci
 					read_animation_update(_packet) 
 					ds_list_delete(packets, i); i--				// pop packet from queue
 				break;
+				case PACK.PROJECTILE: 
+					read_projectile_creation(_packet) 
+					ds_list_delete(packets, i); i--				// pop packet from queue
+				break;
 			}
 		}
 	}
@@ -101,11 +105,21 @@ if (game.state == GAME_STATE.GAME) {
 	}
 	
 	// Send arms animation update
-	var _method = send_animation_update
+	var _method = send_animation_update			// function to call
 	with (obj_player_local) {
 		with (pip) {
 			if (arm_state_changed)
-				_method(other) // call animation update packet function on player
+				_method(other)					// call animation update packet function on player
+		}
+	}
+	
+	// Send projectile updates
+	var _method = send_projectile_creation		// function to call
+	with (obj_player_local) {
+		with (pip) {
+			if (projectile_created)
+				_method(other, projectile_info)	// call projectile creation packet function with player and projectile info
+			projectile_created = false			// reset flag
 		}
 	}
 }

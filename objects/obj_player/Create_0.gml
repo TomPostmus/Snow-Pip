@@ -27,3 +27,7 @@ received_in_backward = false
 
 // Received arms animation state from server
 received_arm_state = ANIM_STATE.EMPTY
+
+// Received projectile creation from server
+received_projectile_creation = false			// whether projectile creation packet has been received this step
+received_projectile_info = {}					// struct containing info about projectile creation

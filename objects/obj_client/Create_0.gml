@@ -101,6 +101,25 @@ function send_animation_update(_player) {
 	buffer_delete(_buffer)
 }
 
+// Send projectile update packet of player
+function send_projectile_creation(_player, _projectile_info) {
+	var _buffer = buffer_create(256, buffer_grow, 1)
+	buffer_seek(_buffer, buffer_seek_start, 0)
+	buffer_write(_buffer, buffer_u8, PACK.PROJECTILE)
+	
+	buffer_write(_buffer, buffer_u8, _player.playid)			// write playid
+	
+	buffer_write(_buffer, buffer_f16, _projectile_info.x)		// write projectile info
+	buffer_write(_buffer, buffer_f16, _projectile_info.y)
+	buffer_write(_buffer, buffer_f16, _projectile_info.speed_x)
+	buffer_write(_buffer, buffer_f16, _projectile_info.speed_y)
+	buffer_write(_buffer, buffer_bool, _projectile_info.spin)
+	buffer_write(_buffer, buffer_u8, _projectile_info.type)
+	
+	network_send_packet(socket, _buffer, buffer_get_size(_buffer))
+	buffer_delete(_buffer)
+}
+
 // Read HELLO response from server
 function read_hello(_buffer) {
 	var _nr = buffer_read(_buffer, buffer_u8)
@@ -218,4 +237,31 @@ function read_animation_update(_buffer) {
 	}
 	
 	buffer_delete(_buffer)								// delete buffer
+}
+
+// Read projectile creation packet
+function read_projectile_creation(_buffer) {
+	var _pl_id = buffer_read(_buffer, buffer_u8)		// read player id to which projectile belongs
+	
+	var _x = buffer_read(_buffer, buffer_f16)			// read projectile info
+	var _y = buffer_read(_buffer, buffer_f16)
+	var _speed_x = buffer_read(_buffer, buffer_f16)
+	var _speed_y = buffer_read(_buffer, buffer_f16)
+	var _spin = buffer_read(_buffer, buffer_bool)
+	var _type = buffer_read(_buffer, buffer_u8)
+	
+	var _player = game.find_player(_pl_id)
+	
+	// notify player
+	with (_player) {
+		received_projectile_creation = true
+		received_projectile_info = {					// give info on projectile to be created
+			x: _x, 
+			y: _y,
+			speed_x: _speed_x,
+			speed_y: _speed_y,
+			spin: _spin,
+			type: _type
+		}
+	}
 }

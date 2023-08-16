@@ -14,7 +14,7 @@ if (broadcast_movement_update) {
 		packgen_movement_update()
 	)
 }
-for (var i = 0; i < ds_list_size(broadcast_anim_update); i ++) {
+for (var i = 0; i < ds_list_size(broadcast_anim_update); i ++) { // loop through (potential) broadcast requests
 	var _client_connection = broadcast_anim_update[|i][0]
 	var _player = broadcast_anim_update[|i][1]
 	
@@ -23,11 +23,22 @@ for (var i = 0; i < ds_list_size(broadcast_anim_update); i ++) {
 		_client_connection			// except client connection from broadcast
 	)
 }
+for (var i = 0; i < ds_list_size(broadcast_projectiles); i ++) {
+	var _client_connection = broadcast_projectiles[|i][0]
+	var _projectile = broadcast_projectiles[|i][1]
+	
+	broadcast_packet(
+		packgen_projectile_creation(_projectile),
+		_client_connection			// except client connection from broadcast
+	)
+}
 
 // Reset flags
 broadcast_game_update = false
 broadcast_player_update = false
 broadcast_movement_update = false
+ds_list_clear(broadcast_anim_update) // clear broadcast requests
+ds_list_clear(broadcast_projectiles)
 
 // Catch up with new clients
 for (var i = 0; i < ds_list_size(catch_up_clients); i ++) {

@@ -135,3 +135,12 @@ if (!player.local) {
 	// Check if state changed
 	arm_state_changed = (_prev_state != arm_state)
 }
+
+// Create projectile based on server input
+if (!player.local && player.received_projectile_creation) {
+	var _info = player.received_projectile_info			// get info
+	
+	throw_projectile_remote(_info)						// create projectile
+	
+	player.received_projectile_creation = false			// reset flag
+}

@@ -7,6 +7,7 @@ broadcast_game_update = false
 broadcast_player_update = false
 broadcast_movement_update = false
 broadcast_anim_update = ds_list_create() // list of clients of which we want to broadcast arms animation update
+broadcast_projectiles = ds_list_create() // list of projectile creations we want to broadcast
 
 catch_up_clients = ds_list_create() // list of clients that we want to catch up with next step (set from async event)
 
@@ -157,6 +158,25 @@ function packgen_animation_update(_player) {
 	
 	buffer_write(_buffer, buffer_u8, _player.playid)			// write playid
 	buffer_write(_buffer, buffer_u8, _player.arm_state)			// write animation state
+	
+	return _buffer
+}
+
+// Generate projectile creation packet of projectile
+function packgen_projectile_creation(_projectile) {
+	// create buffer
+	var _buffer = buffer_create(256, buffer_grow, 1)
+	buffer_seek(_buffer, buffer_seek_start, 0)
+	buffer_write(_buffer, buffer_u8, PACK.PROJECTILE)
+	
+	buffer_write(_buffer, buffer_u8, _projectile.playid)		// write playid
+	
+	buffer_write(_buffer, buffer_f16, _projectile.x)			// write projectile info
+	buffer_write(_buffer, buffer_f16, _projectile.y)
+	buffer_write(_buffer, buffer_f16, _projectile.speed_x)
+	buffer_write(_buffer, buffer_f16, _projectile.speed_y)
+	buffer_write(_buffer, buffer_bool, _projectile.spin)
+	buffer_write(_buffer, buffer_u8, _projectile.type)
 	
 	return _buffer
 }
