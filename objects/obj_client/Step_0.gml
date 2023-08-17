@@ -17,6 +17,7 @@ if (connect_state == "await_hello") {					// if in await hello state, look speci
 		var _packet = packets[|i]
 		buffer_seek(_packet, buffer_seek_start, 0)		// move to start position (for reading)
 		var _type = buffer_read(_packet, buffer_u8)
+		var _type2 = buffer_peek(_packet, 0, buffer_u8)
 		
 		if (_type == PACK.UPDATE_GAME) {				// found it!
 			read_game_update(_packet);					// process packet

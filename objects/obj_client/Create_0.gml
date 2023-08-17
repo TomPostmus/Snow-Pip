@@ -17,6 +17,7 @@ alarm[0] = connection_timeout				// set connection timeout alarm
 
 // Packet queue
 packets = ds_list_create()					// list of received packets (representing packet queue) 
+packet_log = ds_list_create()				// list of packet types received (for logging purpose)	
 
 // Player movement updates sending
 send_movement_period = 1					// after how many steps to send player movement to server
@@ -135,7 +136,7 @@ function read_hello(_buffer) {
 }
 
 // Read game update packet
-function read_game_update(_buffer) {
+function read_game_update(_buffer) {	
 	game.state = buffer_read(_buffer, buffer_u8) // read game state
 	
 	var _nr = buffer_read(_buffer, buffer_u8) // read number of players

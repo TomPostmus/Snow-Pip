@@ -10,6 +10,20 @@ enum PACK {
 	ERROR					// server error
 }
 
+function pack_to_string(_type) {	// to string function of packet enum
+	switch(_type) {
+		case PACK.HELLO: return "HELLO"
+		case PACK.UPDATE_GAME: return "UPDATE_GAME"
+		case PACK.UPDATE_PLAYER: return "UPDATE_PLAYER"
+		case PACK.UPDATE_MOVEMENT: return "UPDATE_MOVEMENT"
+		case PACK.UPDATE_ANIM: return "UPDATE_ANIM"
+		case PACK.SPAWN_PLAYER: return "SPAWN_PLAYER"
+		case PACK.PROJECTILE: return "PROJECTILE"
+		case PACK.ERROR: return "ERROR"
+	}
+	return ""
+}
+
 enum GAME_STATE {
 	LOBBY,					// pre-game lobby
 	GAME					// while game

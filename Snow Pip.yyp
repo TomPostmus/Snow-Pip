@@ -27,7 +27,7 @@
   "isEcma": false,
   "LibraryEmitters": [],
   "MetaData": {
-    "IDEVersion": "2023.6.0.92",
+    "IDEVersion": "2023.4.0.84",
   },
   "resources": [
     {"id":{"name":"spr_wall_simple","path":"sprites/spr_wall_simple/spr_wall_simple.yy",},},
