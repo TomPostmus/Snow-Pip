@@ -26,6 +26,10 @@ throw_strength = 0				// value from 0 to 1, how strongly to throw projectile
 projectile_created = false		// whether projectile was created in current step (for synchronization of client)
 projectile_info = {}			// struct containing info about projectile created
 
+// Movement sync disable when hit by projectile (for more natural impact effect)
+movement_sync_disable_timer = 0 // count down timer for disable movement sync
+movement_sync_disable_time = 30	// how many steps to disable movement sync
+
 // Create projectile inst locally
 function throw_projectile(_spin) {
 	var _arm_x = collision.x + lengthdir_x(8, rotation)

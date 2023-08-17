@@ -1,5 +1,23 @@
-// Find target
-target = instance_find(obj_pip_collision, 0)
+// Default target
+if (target_select == -1) {
+	var _player = instance_find(obj_player_local, 0)			// find first local player
+	if (instance_exists(_player.pip))
+		target = _player.pip.collision							// set target
+} else {
+	var _player = instance_find(obj_player, target_select)		// find player with id selector
+	if (instance_exists(_player.pip))
+		target = _player.pip.collision							// set target
+}
+
+// Selector
+if (keyboard_check_pressed(vk_pageup))
+	target_select = (target_select + 1)
+		mod instance_number(obj_player)							// increase selector and do modulo
+if (keyboard_check_pressed(vk_pagedown))
+	target_select =
+		(target_select - 1 + instance_number(obj_player))
+		mod instance_number(obj_player)							// decrease selector and do modulo
+
 
 // Set view at camera location
 camera_set_view_pos(view_camera[0],

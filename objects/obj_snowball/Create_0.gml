@@ -11,4 +11,8 @@ function impact_pip(pip) {
 	
 	with(pip.collision)
 		physics_apply_impulse(x, y, imp_x, imp_y)
+	
+	// set movement sync disable timer (to avoid stuttery impact effect for remote players)
+	pip.movement_sync_disable_timer =		
+		pip.movement_sync_disable_time
 }
