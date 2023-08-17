@@ -11,6 +11,7 @@ window_set_size(window_w, view_main_h)
 var display_w = display_get_width()
 window_set_position(display_w / 2 - window_w / 2, 30)
 surface_resize(application_surface, window_w, view_main_h)
+window_set_caption("Server")
 
 // Set viewport size
 for (var rm = 0; room_exists(rm); rm ++) {

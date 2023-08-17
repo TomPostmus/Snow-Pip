@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Snow Pip",
-    "path": "Snow Pip.yyp",
+    "name": "Camera & Graphics",
+    "path": "folders/Camera & Graphics.yy",
   },
   "parentObjectId": null,
   "persistent": true,
