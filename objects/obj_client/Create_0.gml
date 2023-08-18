@@ -23,6 +23,8 @@ packet_log = ds_list_create()				// list of packet types received (for logging p
 send_movement_period = 1					// after how many steps to send player movement to server
 send_movement_timer = 0						// timer to send movement update
 
+// Projectiles
+projectile_queue = ds_queue_create()		// queue of projectiles (created by local players) that await a projectile_id given to them (by server)
 
 // Send HELLO packet with amount of local players
 function send_hello() {
@@ -244,6 +246,8 @@ function read_animation_update(_buffer) {
 function read_projectile_creation(_buffer) {
 	var _pl_id = buffer_read(_buffer, buffer_u8)		// read player id to which projectile belongs
 	
+	var _proj_id = buffer_read(_buffer, buffer_u8)		// read unique projectile id of this projectile
+	
 	var _x = buffer_read(_buffer, buffer_f16)			// read projectile info
 	var _y = buffer_read(_buffer, buffer_f16)
 	var _speed_x = buffer_read(_buffer, buffer_f16)
@@ -262,7 +266,20 @@ function read_projectile_creation(_buffer) {
 			speed_x: _speed_x,
 			speed_y: _speed_y,
 			spin: _spin,
-			type: _type
+			type: _type,
+			projectile_id: _proj_id
 		}
 	}
+}
+
+// Read projectile id packet
+function read_projectile_id(_buffer) {
+	var _projectile_id = buffer_read(_buffer, buffer_u8)	// read projectile id
+	
+	var _projectile = ds_queue_dequeue(projectile_queue)	// dequeue projectile
+	
+	if (!is_undefined(_projectile))
+		_projectile.projectile_id = _projectile_id			// asssign id
+		
+	buffer_delete(_buffer)									// delete buffer
 }

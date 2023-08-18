@@ -3,6 +3,8 @@ state = GAME_STATE.LOBBY
 
 respawn_time = 300 // how many steps to wait for respawn
 
+next_projectile_id = 0 // next unique projectile id (incremented each time projectile is created)
+
 // Find player based on player id
 function find_player(playid) {
 	with (obj_player) {
@@ -23,6 +25,8 @@ function unique_playid() {
 			playids, new_id) != -1) {
 		new_id ++
 	}
+	
+	ds_list_destroy(playids) // destroy list
 		
 	return new_id
 }

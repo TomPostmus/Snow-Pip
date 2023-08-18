@@ -171,6 +171,8 @@ function packgen_projectile_creation(_projectile) {
 	
 	buffer_write(_buffer, buffer_u8, _projectile.playid)		// write playid
 	
+	buffer_write(_buffer, buffer_u8, _projectile.projectile_id)	// write projectile id
+	
 	buffer_write(_buffer, buffer_f16, _projectile.x)			// write projectile info
 	buffer_write(_buffer, buffer_f16, _projectile.y)
 	buffer_write(_buffer, buffer_f16, _projectile.speed_x)

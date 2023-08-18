@@ -11,6 +11,7 @@
   },
   "defaultScriptType": 1,
   "Folders": [
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Camera & Graphics","folderPath":"folders/Camera & Graphics.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"MultiClient","folderPath":"folders/MultiClient.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Networking","folderPath":"folders/Networking.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Pip","folderPath":"folders/Pip.yy",},
@@ -22,7 +23,6 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"pip_arm","folderPath":"folders/Sprites/pip/pip_arm.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"snowball","folderPath":"folders/Sprites/snowball.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"wall","folderPath":"folders/Sprites/wall.yy",},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Camera & Graphics","folderPath":"folders/Camera & Graphics.yy",},
   ],
   "IncludedFiles": [],
   "isEcma": false,
@@ -75,7 +75,7 @@
     {"id":{"name":"network_packet_types","path":"scripts/network_packet_types/network_packet_types.yy",},},
     {"id":{"name":"spr_wall_collision","path":"sprites/spr_wall_collision/spr_wall_collision.yy",},},
     {"id":{"name":"spr_pip_arm_throw_spin","path":"sprites/spr_pip_arm_throw_spin/spr_pip_arm_throw_spin.yy",},},
-    {"id":{"name":"obj_snowball","path":"objects/obj_snowball/obj_snowball.yy",},},
+    {"id":{"name":"obj_projectile","path":"objects/obj_projectile/obj_projectile.yy",},},
     {"id":{"name":"stage_maze","path":"rooms/stage_maze/stage_maze.yy",},},
   ],
   "RoomOrderNodes": [

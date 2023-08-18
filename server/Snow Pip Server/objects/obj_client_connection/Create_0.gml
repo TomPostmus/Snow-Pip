@@ -190,17 +190,41 @@ function read_projectile_creation(_buffer) {
 	var _spin = buffer_read(_buffer, buffer_bool)
 	var _type = buffer_read(_buffer, buffer_u8)
 	
+	var _player = game.find_player(_pl_id)
+	
 	var _projectile = instance_create_layer(					// create projectile
 		_x, _y, "Instances", obj_projectile
 	)
+	_projectile.own_player = _player							// assign player obj (in order to avoid hitting itself)
 	
 	_projectile.playid = _pl_id									// assign playid
 	
+	_projectile.projectile_id =									// assign unique projectile id
+		_projectile.unique_projectile_id()
+		
 	_projectile.speed_x = _speed_x								// assign other properties
 	_projectile.speed_y = _speed_y
 	_projectile.spin = _spin
-	_projectile.type = _type
+	_projectile.type = _type	
+	
+	// immediately respond with unique projectile id
+	send_projectile_id(_projectile)
 	
 	// notify server to broadcast projectile creation
 	ds_list_add(server.broadcast_projectiles, [self, _projectile])
+}
+
+// Send packet with unique projectile id
+function send_projectile_id(_projectile) {	
+	// create response buffer
+	var _buffer = buffer_create(256, buffer_grow, 1)
+	buffer_seek(_buffer, buffer_seek_start, 0)
+	buffer_write(_buffer, buffer_u8, PACK.PROJECTILE_ID)
+	
+	buffer_write(_buffer, buffer_u8,
+		_projectile.projectile_id)								// put projectile id
+	
+	// send packet to client
+	network_send_packet(socket, _buffer, buffer_get_size(_buffer))
+	buffer_delete(_buffer)
 }

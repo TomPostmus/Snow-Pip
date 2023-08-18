@@ -29,18 +29,18 @@ if (spin) {
 
 // Hit detection
 var wall = instance_place(x, y, obj_wall_collision)
-var head = instance_place(x, y, obj_pip_hmask_head)
-var trunk = instance_place(x, y, obj_pip_hmask_trunk)
+var head = instance_place(x, y, obj_hmask_head)
+var trunk = instance_place(x, y, obj_hmask_trunk)
 var hit = (wall != noone)
-	|| (head != noone && head != own_pip.hmask_head)
-	|| (trunk != noone && trunk != own_pip.hmask_trunk)
+	|| (head != noone && head != own_player.hmask_head)
+	|| (trunk != noone && trunk != own_player.hmask_trunk)
 
 if (hit) {
-	instance_create_layer(x, y, "Instances", obj_snowball_pulverise)
 	instance_destroy()
 	
-	if (head != noone)
-		impact_pip(head.pip)
-	if (trunk != noone)
-		impact_pip(trunk.pip)
+	// Damage
+	//if (head != noone)
+	//	impact_pip(head.pip)
+	//if (trunk != noone)
+	//	impact_pip(trunk.pip)
 }

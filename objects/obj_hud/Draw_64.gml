@@ -20,7 +20,6 @@ if (instance_exists(camera)) {
 			)
 		
 			pip_info_timer[? _pip] --						// decrease timer
-			client_msg(string(pip_info_timer[? _pip]))
 		
 			draw_set_alpha(1)								// reset alpha
 			draw_set_halign(fa_left)						// reset halign

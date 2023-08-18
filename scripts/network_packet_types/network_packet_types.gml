@@ -6,6 +6,8 @@ enum PACK {
 	UPDATE_ANIM,			// update animation state of player
 	SPAWN_PLAYER,			// spawn player at location
 	PROJECTILE,				// created projectile at a location with speed
+	PROJECTILE_ID,			// response by server to a projectile, giving its id
+	DAMAGE,					// damage on a player (optionally giving projectile id that caused damage)
 	
 	ERROR					// server error
 }
@@ -19,6 +21,8 @@ function pack_to_string(_type) {	// to string function of packet enum
 		case PACK.UPDATE_ANIM: return "UPDATE_ANIM"
 		case PACK.SPAWN_PLAYER: return "SPAWN_PLAYER"
 		case PACK.PROJECTILE: return "PROJECTILE"
+		case PACK.PROJECTILE_ID: return "PROJECTILE_ID"
+		case PACK.DAMAGE: return "DAMAGE"
 		case PACK.ERROR: return "ERROR"
 	}
 	return ""

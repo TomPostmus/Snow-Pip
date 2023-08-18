@@ -1,5 +1,6 @@
 {
   "FolderOrderSettings": [
+    {"name":"Camera & Graphics","order":12,"path":"folders/Camera & Graphics.yy",},
     {"name":"MultiClient","order":9,"path":"folders/MultiClient.yy",},
     {"name":"Networking","order":8,"path":"folders/Networking.yy",},
     {"name":"Pip","order":5,"path":"folders/Pip.yy",},
@@ -10,7 +11,6 @@
     {"name":"pip_arm","order":5,"path":"folders/Sprites/pip/pip_arm.yy",},
     {"name":"snowball","order":17,"path":"folders/Sprites/snowball.yy",},
     {"name":"wall","order":4,"path":"folders/Sprites/wall.yy",},
-    {"name":"Camera & Graphics","order":12,"path":"folders/Camera & Graphics.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"spr_snowball_part_big2","order":3,"path":"sprites/spr_snowball_part_big2/spr_snowball_part_big2.yy",},
@@ -47,6 +47,6 @@
     {"name":"spr_pip_hmask_head","order":2,"path":"sprites/spr_pip_hmask_head/spr_pip_hmask_head.yy",},
     {"name":"spr_wall_collision","order":3,"path":"sprites/spr_wall_collision/spr_wall_collision.yy",},
     {"name":"spr_pip_arm_throw_spin","order":5,"path":"sprites/spr_pip_arm_throw_spin/spr_pip_arm_throw_spin.yy",},
-    {"name":"obj_snowball","order":6,"path":"objects/obj_snowball/obj_snowball.yy",},
+    {"name":"obj_projectile","order":6,"path":"objects/obj_projectile/obj_projectile.yy",},
   ],
 }

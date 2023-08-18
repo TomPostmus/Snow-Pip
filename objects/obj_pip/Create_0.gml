@@ -24,7 +24,8 @@ throw_strength = 0				// value from 0 to 1, how strongly to throw projectile
 
 // Projectiles
 projectile_created = false		// whether projectile was created in current step (for synchronization of client)
-projectile_info = {}			// struct containing info about projectile created
+projectile_info = {}			// struct containing info about creation of projectile (initial state)
+projectile = noone				// projectile that was created last
 
 // Movement sync disable when hit by projectile (for more natural impact effect)
 movement_sync_disable_timer = 0 // count down timer for disable movement sync
@@ -39,40 +40,36 @@ function throw_projectile(_spin) {
 	var _item_abs_y = _arm_y
 		+ lengthdir_y(item_x, rotation) + lengthdir_y(item_y, rotation - 90)
 	
-	var _projectile = instance_create_layer(
+	projectile = instance_create_layer(
 		_item_abs_x, _item_abs_y,
-		"Instances", obj_snowball)
-	_projectile.image_angle = rotation
-	_projectile.own_pip = self
+		"Instances", obj_projectile)
+	projectile.image_angle = rotation
+	projectile.own_pip = self
 		
 	var _throw_speed = 7 + throw_strength * 2
-	_projectile.speed_x = lengthdir_x(_throw_speed, rotation)
-	_projectile.speed_y = lengthdir_y(_throw_speed, rotation)
-	_projectile.spin = _spin
+	projectile.speed_x = lengthdir_x(_throw_speed, rotation)
+	projectile.speed_y = lengthdir_y(_throw_speed, rotation)
+	projectile.spin = _spin
+	projectile.type = ITEM.SNOWBALL
 	
 	// Notify client of projectile creation
 	projectile_created = true
-	projectile_info = {	// construct projectile info struct
-		x: _projectile.x, 
-		y: _projectile.y,
-		speed_x: _projectile.speed_x,
-		speed_y: _projectile.speed_y,
-		spin: _projectile.spin,
-		type: ITEM.SNOWBALL
-	}
+	projectile_info = projectile.generate_info_struct() // save initial state for sending to server
 }
 
 // Create projectile inst from info received from server
 function throw_projectile_remote(_info) {
 	var _projectile = instance_create_layer(			// create projectile
 		_info.x, _info.y,
-		"Instances", obj_snowball)
+		"Instances", obj_projectile)
 	_projectile.image_angle = rotation					// set image_angle of projectile to current rotation
 	_projectile.own_pip = self
 	
 	_projectile.speed_x = _info.speed_x
 	_projectile.speed_y = _info.speed_y
 	_projectile.spin = _info.spin
+	_projectile.type = _info.type
+	_projectile.projectile_id = _info.projectile_id
 }
 
 // Set position of item based on current sprite

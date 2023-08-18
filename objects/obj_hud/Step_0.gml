@@ -24,7 +24,6 @@ if (instance_exists(camera)) {
 			if (ds_list_find_index(
 				pips_in_sight_prev, _pip) == -1) {		// check if this pip just popped in screen
 				pip_info_timer[? _pip] = 300			// set timer
-				client_msg("Timer set")
 			}
 		}		
 	}
