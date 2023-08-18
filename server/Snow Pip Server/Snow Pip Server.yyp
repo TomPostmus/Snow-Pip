@@ -13,9 +13,10 @@
   "Folders": [
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Rooms","folderPath":"folders/Rooms.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"sprites","folderPath":"folders/sprites.yy",},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"wall","folderPath":"folders/sprites/wall.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"hmask","folderPath":"folders/sprites/hmask.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"snowball","folderPath":"folders/sprites/snowball.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"wall","folderPath":"folders/sprites/wall.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"simulation","folderPath":"folders/simulation.yy",},
   ],
   "IncludedFiles": [],
   "isEcma": false,

@@ -67,12 +67,20 @@ if (connect_state == "await_hello") {					// if in await hello state, look speci
 					read_animation_update(_packet) 
 					ds_list_delete(packets, i); i--				// pop packet from queue
 				break;
+				case PACK.UPDATE_HP: 
+					read_hp_update(_packet) 
+					ds_list_delete(packets, i); i--				// pop packet from queue
+				break;
 				case PACK.PROJECTILE: 
 					read_projectile_creation(_packet) 
 					ds_list_delete(packets, i); i--				// pop packet from queue
 				break;
 				case PACK.PROJECTILE_ID: 
 					read_projectile_id(_packet) 
+					ds_list_delete(packets, i); i--				// pop packet from queue
+				break;
+				case PACK.PROJECTILE_HIT: 
+					read_projectile_hit(_packet) 
 					ds_list_delete(packets, i); i--				// pop packet from queue
 				break;
 			}

@@ -9,8 +9,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Snow Pip Server",
-    "path": "Snow Pip Server.yyp",
+    "name": "simulation",
+    "path": "folders/simulation.yy",
   },
   "parentObjectId": null,
   "persistent": false,

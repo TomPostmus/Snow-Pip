@@ -234,9 +234,24 @@ function read_animation_update(_buffer) {
 	
 	var _player = game.find_player(_pl_id)
 	
-	// update state
+	with (_player) received_arm_state = _arm_state		// update state
+	
+	buffer_delete(_buffer)								// delete buffer
+}
+
+// Read hp update packet
+function read_hp_update(_buffer) {
+	var _pl_id = buffer_read(_buffer, buffer_u8)		// read player id of player to spawn
+	
+	var _hp = buffer_read(_buffer, buffer_u8)			// read new hp
+	
+	var _player = game.find_player(_pl_id)
+	
 	with (_player) {
-		received_arm_state = _arm_state
+		hp = _hp										// update hp
+		
+		if (hp == 0)									// check if player died
+			despawn = true								// set despawn flag
 	}
 	
 	buffer_delete(_buffer)								// delete buffer
@@ -278,8 +293,22 @@ function read_projectile_id(_buffer) {
 	
 	var _projectile = ds_queue_dequeue(projectile_queue)	// dequeue projectile
 	
-	if (!is_undefined(_projectile))
+	if (!is_undefined(_projectile) && instance_exists(_projectile))
 		_projectile.projectile_id = _projectile_id			// asssign id
 		
 	buffer_delete(_buffer)									// delete buffer
+}
+
+// Read projectile hit packet
+function read_projectile_hit(_buffer) {
+	var _projectile_id = buffer_read(_buffer, buffer_u8)	// read projectile id
+
+	// find projectile
+	var _projectile = noone
+	with (obj_projectile) {
+		if (projectile_id == _projectile_id)
+			_projectile = self
+	}
+	
+	with (_projectile) instance_destroy()					// destroy projectile
 }

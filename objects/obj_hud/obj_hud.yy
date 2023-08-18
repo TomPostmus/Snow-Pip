@@ -10,8 +10,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "MultiClient",
-    "path": "folders/MultiClient.yy",
+    "name": "Camera & Graphics",
+    "path": "folders/Camera & Graphics.yy",
   },
   "parentObjectId": null,
   "persistent": false,

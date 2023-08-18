@@ -2,15 +2,15 @@
   "FolderOrderSettings": [
     {"name":"Rooms","order":10,"path":"folders/Rooms.yy",},
     {"name":"sprites","order":17,"path":"folders/sprites.yy",},
-    {"name":"wall","order":3,"path":"folders/sprites/wall.yy",},
     {"name":"hmask","order":5,"path":"folders/sprites/hmask.yy",},
     {"name":"snowball","order":6,"path":"folders/sprites/snowball.yy",},
+    {"name":"wall","order":3,"path":"folders/sprites/wall.yy",},
+    {"name":"simulation","order":23,"path":"folders/simulation.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"obj_spawn","order":18,"path":"objects/obj_spawn/obj_spawn.yy",},
-    {"name":"obj_hmask_head","order":21,"path":"objects/obj_hmask_head/obj_hmask_head.yy",},
     {"name":"obj_server","order":11,"path":"objects/obj_server/obj_server.yy",},
-    {"name":"obj_hmask_trunk","order":22,"path":"objects/obj_hmask_trunk/obj_hmask_trunk.yy",},
+    {"name":"obj_hmask_trunk","order":1,"path":"objects/obj_hmask_trunk/obj_hmask_trunk.yy",},
     {"name":"network_packet_types","order":12,"path":"scripts/network_packet_types/network_packet_types.yy",},
     {"name":"obj_player","order":14,"path":"objects/obj_player/obj_player.yy",},
     {"name":"obj_graphics","order":19,"path":"objects/obj_graphics/obj_graphics.yy",},
@@ -21,7 +21,7 @@
     {"name":"obj_wall_collision","order":4,"path":"objects/obj_wall_collision/obj_wall_collision.yy",},
     {"name":"obj_client_connection","order":13,"path":"objects/obj_client_connection/obj_client_connection.yy",},
     {"name":"spr_wall_collision","order":2,"path":"sprites/spr_wall_collision/spr_wall_collision.yy",},
-    {"name":"obj_projectile","order":20,"path":"objects/obj_projectile/obj_projectile.yy",},
+    {"name":"obj_projectile","order":2,"path":"objects/obj_projectile/obj_projectile.yy",},
     {"name":"obj_game","order":16,"path":"objects/obj_game/obj_game.yy",},
   ],
 }

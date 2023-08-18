@@ -32,6 +32,13 @@ for (var i = 0; i < ds_list_size(broadcast_projectiles); i ++) {
 		_client_connection			// except client connection from broadcast
 	)
 }
+for (var i = 0; i < ds_list_size(broadcast_projectile_hits); i ++) {
+	var _projectile_id = broadcast_projectile_hits[|i]
+	
+	broadcast_packet(
+		packgen_projectile_hit(_projectile_id)
+	)
+}
 
 // Reset flags
 broadcast_game_update = false
@@ -39,6 +46,7 @@ broadcast_player_update = false
 broadcast_movement_update = false
 ds_list_clear(broadcast_anim_update) // clear broadcast requests
 ds_list_clear(broadcast_projectiles)
+ds_list_clear(broadcast_projectile_hits)
 
 // Catch up with new clients
 for (var i = 0; i < ds_list_size(catch_up_clients); i ++) {
@@ -73,16 +81,24 @@ if (game.state == GAME_STATE.LOBBY) {
 		}
 	}
 	
+	// Broadcast hp updates
+	with (obj_player) {
+		if (hp_changed) {			
+			other.broadcast_packet(
+				other.packgen_hp_update(self)
+			)
+		}
+	}
+	
 	// Mid-game spawn/respawn
 	with (obj_player) {
 		if (hp <= 0) {										// check if dead
-			respawn_timer --								// count down respawn timer
-			if (respawn_timer <= 0) {						// check if respawn timer has elapsed
+			if (respawn_timer == 0) {						// check if respawn timer has elapsed
 				if (other.game.spawn_at_free_spawn(self)) {	// spawn at free spawn (if that succeeds, i.e. there is a free spawn)
 					other.broadcast_packet(					// broadcast player spawn
 						other.packgen_spawn_player(self)
-					
-				); show_debug_message("Spawned " + name)}
+					)
+				}
 			}
 		}
 	}

@@ -28,6 +28,9 @@ if (arm_state == ANIM_STATE.HOLD) {
 	arm_index += t								// advance animation
 	arm_spr = spr_pip_arm_throw
 	
+	arm_index = min(arm_index,					// cap animation
+		sprite_get_number(arm_spr)-0.5)
+	
 } else if (arm_state == ANIM_STATE.THROW_SPIN) {
 	if (arm_state_changed)						// start of state
 		arm_index = 0							// reset arm index
@@ -35,6 +38,9 @@ if (arm_state == ANIM_STATE.HOLD) {
 	var t = 0.7
 	arm_index += t								// advance animation
 	arm_spr = spr_pip_arm_throw_spin
+	
+	arm_index = min(arm_index,					// cap animation
+		sprite_get_number(arm_spr)-0.5)
 	
 } else if (arm_state == ANIM_STATE.EMPTY) {
 	arm_index = 0
@@ -47,6 +53,9 @@ if (arm_state == ANIM_STATE.HOLD) {
 	var t = 0.5
 	arm_index += t								// advance animation
 	arm_spr = spr_pip_arm_pickup
+	
+	arm_index = min(arm_index,					// cap animation
+		sprite_get_number(arm_spr)-0.5)
 	
 }
 
@@ -125,11 +134,11 @@ if (player.local) {
 			throw_projectile(true)
 		}
 	} else if (arm_state == ANIM_STATE.THROW) {
-		if (arm_index > sprite_get_number(arm_spr)-1)
+		if (arm_index == sprite_get_number(arm_spr)-0.5)
 			arm_state = ANIM_STATE.EMPTY
 		
 	} else if (arm_state == ANIM_STATE.THROW_SPIN) {
-		if (arm_index > sprite_get_number(arm_spr)-1)
+		if (arm_index == sprite_get_number(arm_spr)-0.5)
 			arm_state = ANIM_STATE.EMPTY
 		
 	} else if (arm_state == ANIM_STATE.EMPTY) {
@@ -137,7 +146,7 @@ if (player.local) {
 			arm_state = ANIM_STATE.PICKUP
 	
 	} else if (arm_state == ANIM_STATE.PICKUP) {
-		if (arm_index > sprite_get_number(arm_spr)-1) 
+		if (arm_index == sprite_get_number(arm_spr)-0.5) 
 			arm_state = ANIM_STATE.HOLD
 		
 	}
