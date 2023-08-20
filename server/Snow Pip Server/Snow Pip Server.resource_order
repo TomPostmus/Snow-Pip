@@ -1,11 +1,11 @@
 {
   "FolderOrderSettings": [
     {"name":"Rooms","order":10,"path":"folders/Rooms.yy",},
+    {"name":"simulation","order":23,"path":"folders/simulation.yy",},
     {"name":"sprites","order":17,"path":"folders/sprites.yy",},
     {"name":"hmask","order":5,"path":"folders/sprites/hmask.yy",},
     {"name":"snowball","order":6,"path":"folders/sprites/snowball.yy",},
     {"name":"wall","order":3,"path":"folders/sprites/wall.yy",},
-    {"name":"simulation","order":23,"path":"folders/simulation.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"obj_spawn","order":18,"path":"objects/obj_spawn/obj_spawn.yy",},

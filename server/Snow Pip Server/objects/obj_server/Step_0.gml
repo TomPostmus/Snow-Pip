@@ -33,11 +33,12 @@ for (var i = 0; i < ds_list_size(broadcast_projectiles); i ++) {
 	)
 }
 for (var i = 0; i < ds_list_size(broadcast_projectile_hits); i ++) {
-	var _projectile_id = broadcast_projectile_hits[|i]
+	var _projectile_id = broadcast_projectile_hits[|i][0]
+	var _hit_player = broadcast_projectile_hits[|i][1]
 	
-	broadcast_packet(
-		packgen_projectile_hit(_projectile_id)
-	)
+	if (instance_exists(_hit_player))	
+		broadcast_packet(packgen_projectile_hit(_projectile_id, _hit_player.playid))
+	else broadcast_packet(packgen_projectile_hit(_projectile_id))
 }
 
 // Reset flags

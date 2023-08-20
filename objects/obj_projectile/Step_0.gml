@@ -28,18 +28,18 @@ if (spin) {
 	
 
 // Hit detection
-var wall = instance_place(x, y, obj_wall_collision)
-var head = instance_place(x, y, obj_pip_hmask_head)
-var trunk = instance_place(x, y, obj_pip_hmask_trunk)
-var hit = (wall != noone)
-	|| (head != noone && head != own_pip.hmask_head)
-	|| (trunk != noone && trunk != own_pip.hmask_trunk)
+var _solid = instance_place(x, y, obj_parent_solid)
+var _head = instance_place(x, y, obj_pip_hmask_head)
+var _trunk = instance_place(x, y, obj_pip_hmask_trunk)
+var _hit = (_solid != noone)
+	|| (_head != noone && _head != own_pip.hmask_head)
+	|| (_trunk != noone && _trunk != own_pip.hmask_trunk)
 
-if (hit) {
+if (_hit) {
 	instance_destroy()
 	
-	if (head != noone)
-		impact_pip(head.pip)
-	if (trunk != noone)
-		impact_pip(trunk.pip)
+	if (_head != noone)
+		impact_pip(_head.pip)
+	if (_trunk != noone)
+		impact_pip(_trunk.pip)
 }

@@ -36,15 +36,19 @@ var hit = (wall != noone)
 	|| (trunk != noone && trunk != own_player.hmask_trunk)
 
 if (hit) {
-	// Notify server to broadcast destroy event of this projectile
-	ds_list_add(obj_server.broadcast_projectile_hits, projectile_id)
 		
 	// Damage player
+	var _player = noone
 	if (head != noone){
-		head.player.damage(20)
+		_player = head.player
+		_player.damage(20)
 	} else if (trunk != noone) {
-		trunk.player.damage(20)
+		_player = trunk.player
+		_player.damage(20)
 	}
+	
+	// Notify server to broadcast destroy event of this projectile
+	ds_list_add(obj_server.broadcast_projectile_hits, [projectile_id, _player])
 	
 	// Destroy self
 	instance_destroy()

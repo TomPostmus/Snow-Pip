@@ -302,6 +302,8 @@ function read_projectile_id(_buffer) {
 // Read projectile hit packet
 function read_projectile_hit(_buffer) {
 	var _projectile_id = buffer_read(_buffer, buffer_u8)	// read projectile id
+	var _hit_player = buffer_read(_buffer, buffer_bool)		// read whether player was hit
+	var _pl_id = buffer_read(_buffer, buffer_u8)			// read player id (of hit player, if the case)
 
 	// find projectile
 	var _projectile = noone
@@ -310,5 +312,17 @@ function read_projectile_hit(_buffer) {
 			_projectile = self
 	}
 	
-	with (_projectile) instance_destroy()					// destroy projectile
+	if (instance_exists(_projectile)) {						// check if projectile was found
+	
+		// find player (if applicable)
+		if (_hit_player) {
+			var _player = game.find_player(_pl_id)
+			
+			if (instance_exists(_player.pip))				// check if player is alive
+				_projectile.impact_pip(_player.pip)
+		}
+	
+		instance_destroy(_projectile)						// destroy projectile
+	
+	}
 }

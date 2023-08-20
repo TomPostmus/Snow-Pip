@@ -1,0 +1,1 @@
+/// @description parent obj for hit detection

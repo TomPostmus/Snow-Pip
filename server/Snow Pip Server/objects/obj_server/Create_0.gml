@@ -199,12 +199,16 @@ function packgen_projectile_creation(_projectile) {
 
 // Generate projectile hit packet to indicate a projectile was destroyed
 function packgen_projectile_hit(_projectile_id) {
+	var _pl_id = argument[1]									// get optional argument hit player id
+	
 	// create buffer
 	var _buffer = buffer_create(256, buffer_grow, 1)
 	buffer_seek(_buffer, buffer_seek_start, 0)
 	buffer_write(_buffer, buffer_u8, PACK.PROJECTILE_HIT)
 	
-	buffer_write(_buffer, buffer_u8, _projectile_id)	// write projectile id
+	buffer_write(_buffer, buffer_u8, _projectile_id)			// write projectile id
+	buffer_write(_buffer, buffer_bool, !is_undefined(_pl_id))	// whether player was hit (add pl_id is defined)
+	buffer_write(_buffer, buffer_u8, _pl_id ?? 0)				// write player id (or zero if undefined)
 	
 	return _buffer
 }
