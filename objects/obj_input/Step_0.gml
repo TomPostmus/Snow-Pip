@@ -30,7 +30,7 @@ if (player.local) {
 				- window_get_width()/2					// horizontal displacement of mouse
 			window_mouse_set(window_get_width()/2,
 				window_get_height()/2)					// reset mouse position
-			//window_set_cursor(cr_none)					// remove cursor from screen			
+			window_set_cursor(cr_none)					// remove cursor from screen			
 		}
 	} else if (_relative_playid == 1) {
 		left = keyboard_check(vk_left)
