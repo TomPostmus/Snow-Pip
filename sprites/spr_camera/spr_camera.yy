@@ -25,8 +25,8 @@
   "nineSlice": null,
   "origin": 4,
   "parent": {
-    "name": "invisible",
-    "path": "folders/Sprites/invisible.yy",
+    "name": "markers",
+    "path": "folders/Sprites/markers.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {
