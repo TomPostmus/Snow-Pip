@@ -1,5 +1,5 @@
 // Set full screen
-full_screen = true
+full_screen = false
 window_set_fullscreen(full_screen)
 window_set_caption("Client " + string(MultiClientGetID()))
 

@@ -2,7 +2,7 @@
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
   "name": "spr_log_house",
-  "bbox_bottom": 136,
+  "bbox_bottom": 263,
   "bbox_left": 8,
   "bbox_right": 239,
   "bbox_top": 8,
@@ -17,7 +17,7 @@
   ],
   "gridX": 0,
   "gridY": 0,
-  "height": 256,
+  "height": 320,
   "HTile": false,
   "layers": [
     {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"e4748542-7418-494c-8f67-edef6ad5c439","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
