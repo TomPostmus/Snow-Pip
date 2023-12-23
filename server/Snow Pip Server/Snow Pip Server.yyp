@@ -22,7 +22,7 @@
   "isEcma": false,
   "LibraryEmitters": [],
   "MetaData": {
-    "IDEVersion": "2023.6.0.92",
+    "IDEVersion": "2023.11.1.129",
   },
   "resources": [
     {"id":{"name":"obj_spawn","path":"objects/obj_spawn/obj_spawn.yy",},},
@@ -52,6 +52,7 @@
     {"roomId":{"name":"lobby","path":"rooms/lobby/lobby.yy",},},
     {"roomId":{"name":"stage_maze","path":"rooms/stage_maze/stage_maze.yy",},},
   ],
+  "templateType": null,
   "TextureGroups": [
     {"resourceType":"GMTextureGroup","resourceVersion":"1.3","name":"Default","autocrop":true,"border":2,"compressFormat":"bz2","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"targets":-1,},
   ],

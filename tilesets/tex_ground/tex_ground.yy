@@ -1,7 +1,7 @@
 {
   "resourceType": "GMTileSet",
   "resourceVersion": "1.0",
-  "name": "tex_snow",
+  "name": "tex_ground",
   "autoTileSets": [],
   "macroPageTiles": {
     "SerialiseHeight": 0,
@@ -16,8 +16,8 @@
     "path": "folders/Sprites/tex.yy",
   },
   "spriteId": {
-    "name": "spr_snow",
-    "path": "sprites/spr_snow/spr_snow.yy",
+    "name": "spr_ground",
+    "path": "sprites/spr_ground/spr_ground.yy",
   },
   "spriteNoExport": true,
   "textureGroupId": {
