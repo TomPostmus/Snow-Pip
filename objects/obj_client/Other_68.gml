@@ -17,5 +17,6 @@ if (_type == network_type_data) {
 	}
 // Non-block connection
 } else if (_type == network_type_non_blocking_connect) {
-	received_server_connection = true
+	if (async_load[? "succeeded"])							// check if connection succeeded (or timeout)
+		received_server_connection = true
 }

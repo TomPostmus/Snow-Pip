@@ -39,16 +39,18 @@ if (hit) {
 		
 	// Damage player
 	var _player = noone
+	var _head_or_trunk = true		// whether head was hit (or trunk)
 	if (head != noone){
 		_player = head.player
 		_player.damage(20)
 	} else if (trunk != noone) {
+		_head_or_trunk = false		// trunk was hit
 		_player = trunk.player
 		_player.damage(20)
 	}
 	
 	// Notify server to broadcast destroy event of this projectile
-	ds_list_add(obj_server.broadcast_projectile_hits, [projectile_id, _player])
+	ds_list_add(obj_server.broadcast_projectile_hits, [projectile_id, _player, _head_or_trunk])
 	
 	// Destroy self
 	instance_destroy()

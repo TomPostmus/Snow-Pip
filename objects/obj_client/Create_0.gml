@@ -76,8 +76,8 @@ function send_movement_update() {
 	with (obj_player_local) {
 		if (instance_exists(pip)) {
 			buffer_write(_buffer, buffer_u8, playid)
-			buffer_write(_buffer, buffer_f16, pip.collision.x)
-			buffer_write(_buffer, buffer_f16, pip.collision.y)
+			buffer_write(_buffer, buffer_f16, pip.col_trunk.x)
+			buffer_write(_buffer, buffer_f16, pip.col_trunk.y)
 			buffer_write(_buffer, buffer_f16, pip.rotation)
 			
 			buffer_write(_buffer, buffer_bool, input.left) // write movement input
@@ -304,6 +304,7 @@ function read_projectile_hit(_buffer) {
 	var _projectile_id = buffer_read(_buffer, buffer_u8)	// read projectile id
 	var _hit_player = buffer_read(_buffer, buffer_bool)		// read whether player was hit
 	var _pl_id = buffer_read(_buffer, buffer_u8)			// read player id (of hit player, if the case)
+	var _head_or_trunk = buffer_read(_buffer, buffer_bool)	// read whether player was hit
 
 	// find projectile
 	var _projectile = noone
@@ -319,7 +320,10 @@ function read_projectile_hit(_buffer) {
 			var _player = game.find_player(_pl_id)
 			
 			if (instance_exists(_player.pip))				// check if player is alive
-				_projectile.impact_pip(_player.pip)
+				var _pip = _player.pip
+				var _body = _head_or_trunk ? 
+					_pip.col_head : _pip.col_trunk			// which body of pip was hit
+				_projectile.impact_body(_body, 0.03)		// apply impulse to body
 		}
 	
 		instance_destroy(_projectile)						// destroy projectile

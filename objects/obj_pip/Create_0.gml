@@ -1,17 +1,32 @@
-collision = instance_create_layer(x, y, "Instances", obj_pip_collision)
-hmask_head = instance_create_layer(x, y, "Instances", obj_pip_hmask_head)
-hmask_head.pip = self
-hmask_trunk = instance_create_layer(x, y, "Instances", obj_pip_hmask_trunk)
-hmask_trunk.pip = self
-
-player = noone // player inst of this pip
-input = noone // input inst to read input from
+player = noone			// player inst of this pip
+input = noone			// input inst to read input from
 
 // Animation vars
-rotation = 0					// facing rotation of pip
-walk_index = 0					// walk subimage index of trunk sprite
-move_axial = 0					// indicates movement on axial axis (-1 back, 1 front)
-move_lateral = 0				// indicates movement on lateral axis (-1 right, 1 left)
+rotation = 0								// facing rotation of pip
+walk_index = 0								// walk subimage index of trunk sprite
+move_axial = 0								// indicates movement on axial axis (-1 back, 1 front)
+move_lateral = 0							// indicates movement on lateral axis (-1 right, 1 left)
+
+// Pip atonomy properties
+//axial_offset_trunk = 0					// axial offset of trunk by definition zero since trunk location is pip location
+axial_offset_head = 7						// axial offset of head (w.r.t trunk pos)
+axial_offset_arms = 8						// axial offset of arms (w.r.t trunk pos)
+
+// Create collision
+var trunk_x = x													// location of trunk (same as start pos)
+var trunk_y = y
+var head_x = x + lengthdir_x(axial_offset_head, rotation)		// location of head
+var head_y = y + lengthdir_y(axial_offset_head, rotation)
+		
+col_trunk = instance_create_layer(			// create trunk collion inst
+	trunk_x, trunk_y, "Instances", obj_pip_col_trunk)
+col_trunk.pip = self						// give pip inst to head for backtracking in hit detection
+col_head = instance_create_layer(			// create head collion inst
+	head_x, head_y, "Instances", obj_pip_col_head)
+col_head.pip = self							// give pip inst to head for backtracking in hit detection
+joint = physics_joint_revolute_create(			// create weld joint between trunk and head
+	col_trunk, col_head, trunk_x, trunk_y,
+	0, 0, false, 0, 0, false, false)
 
 // Arms animation vars
 arm_spr = spr_pip_arm_hold		// spr index of arm(s)
@@ -27,14 +42,14 @@ projectile_created = false		// whether projectile was created in current step (f
 projectile_info = {}			// struct containing info about creation of projectile (initial state)
 projectile = noone				// projectile that was created last
 
-// Movement sync disable when hit by projectile (for more natural impact effect)
+// Movement sync disable when hit by projectile (for more natural impact effect of remote enemy)
 movement_sync_disable_timer = 0 // count down timer for disable movement sync
 movement_sync_disable_time = 30	// how many steps to disable movement sync
 
 // Create projectile inst locally
 function throw_projectile(_spin) {
-	var _arm_x = collision.x + lengthdir_x(8, rotation)
-	var _arm_y = collision.y + lengthdir_y(8, rotation)
+	var _arm_x = col_trunk.x + lengthdir_x(axial_offset_arms, rotation)
+	var _arm_y = col_trunk.y + lengthdir_y(axial_offset_arms, rotation)
 	var _item_abs_x = _arm_x
 		+ lengthdir_x(item_x, rotation) + lengthdir_x(item_y, rotation - 90)
 	var _item_abs_y = _arm_y

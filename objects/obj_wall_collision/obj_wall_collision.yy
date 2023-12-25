@@ -10,8 +10,8 @@
     "path": "folders/Room Objects.yy",
   },
   "parentObjectId": {
-    "name": "obj_parent_solid",
-    "path": "objects/obj_parent_solid/obj_parent_solid.yy",
+    "name": "obj_wall_parent",
+    "path": "objects/obj_wall_parent/obj_wall_parent.yy",
   },
   "persistent": false,
   "physicsAngularDamping": 0.1,

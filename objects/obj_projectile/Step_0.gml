@@ -28,18 +28,27 @@ if (spin) {
 	
 
 // Hit detection
-var _solid = instance_place(x, y, obj_parent_solid)
-var _head = instance_place(x, y, obj_pip_hmask_head)
-var _trunk = instance_place(x, y, obj_pip_hmask_trunk)
+var _solid = instance_place(x, y, obj_wall_parent)
+var _head = instance_place(x, y, obj_pip_col_head)
+var _trunk = instance_place(x, y, obj_pip_col_trunk)
 var _hit = (_solid != noone)
-	|| (_head != noone && _head != own_pip.hmask_head)
-	|| (_trunk != noone && _trunk != own_pip.hmask_trunk)
+	|| (_head != noone && _head != own_pip.col_head)
+	|| (_trunk != noone && _trunk != own_pip.col_trunk)
 
 if (_hit) {
 	instance_destroy()
 	
+	var _pip = noone					// pip inst that was hit
 	if (_head != noone)
-		impact_pip(_head.pip)
+		_pip = _head.pip
+		impact_body(_head, 0.03)		// apply impulse to head
 	if (_trunk != noone)
-		impact_pip(_trunk.pip)
+		_pip = _trunk.pip
+		impact_body(_trunk, 0.03)		// apply impulse to trunk
+	
+	if (instance_exists(_pip)) {		
+		// set movement sync disable timer (to avoid stuttery impact effect for remote players)
+		_pip.movement_sync_disable_timer =		
+			_pip.movement_sync_disable_time
+	}
 }

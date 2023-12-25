@@ -67,14 +67,14 @@ if (player.local) {
 	// Translational movement
 	var _disp_axial, _disp_lateral					// translational displacement on axial and lateral axes
 	_disp_axial =
-		(input.forward * 1.7 - input.backward * 1.2)// slightly slower backwards speed than forwards
+		(input.forward * 2.3 - input.backward * 1.6)// slightly slower backwards speed than forwards
 		* !(input.forward && input.backward)		// if both forward & backward are pressed, movement is zero
 	_disp_lateral = (input.left - input.right) * 0.8
 	
-	collision.phy_position_x +=						// update position
+	col_trunk.phy_position_x +=						// update position of trunk
 		lengthdir_x(_disp_axial, rotation) +
 		lengthdir_x(_disp_lateral, rotation + 90)
-	collision.phy_position_y += 
+	col_trunk.phy_position_y += 
 		lengthdir_y(_disp_axial, rotation) +
 		lengthdir_y(_disp_lateral, rotation + 90)
 	
@@ -88,33 +88,35 @@ if (player.local) {
 		-_max_disp_rotation, _max_disp_rotation)
 		
 	rotation += _disp_rot							// update rotation
-	collision.phy_rotation = -rotation				// update collision rotation
+	col_trunk.phy_rotation = -rotation				// update trunk rotation
+	col_head.phy_rotation = col_trunk.phy_rotation	// update head rotation to trunk rotation
 }
 
 // Move from server input
 if (!player.local) {
 	if (movement_sync_disable_timer <= 0) {			// check if movement sync disable is activated
 		// Update position (with some smoothing)
-		collision.phy_position_x += 
-			(player.received_x - collision.phy_position_x) * 0.6
-		collision.phy_position_y += 
-			(player.received_y - collision.phy_position_y) * 0.6
+		col_trunk.phy_position_x += 
+			(player.received_x - col_trunk.phy_position_x) * 0.6
+		col_trunk.phy_position_y += 
+			(player.received_y - col_trunk.phy_position_y) * 0.6
 	} else
 		movement_sync_disable_timer --				// update timer
 	
 	// Add a small speed component
 	var _speed_lateral = (player.received_in_left - player.received_in_right) * 0.2
 	var _speed_axial = (player.received_in_forward - player.received_in_backward) * 0.2
-	collision.phy_speed_x +=
+	col_trunk.phy_speed_x +=
 		lengthdir_x(_speed_axial, rotation) +
 		lengthdir_x(_speed_lateral, rotation + 90)
-	collision.phy_speed_y +=
+	col_trunk.phy_speed_y +=
 		lengthdir_y(_speed_axial, rotation) +
 		lengthdir_y(_speed_lateral, rotation + 90)
 	
 	// Update rotation (with some smoothing)
 	rotation += (player.received_rot - rotation) * 0.7
-	collision.phy_rotation = -rotation				// update collision rotation
+	col_trunk.phy_rotation = -rotation				// update collision rotation
+	col_head.phy_rotation = col_trunk.phy_rotation	// update head rotation to trunk rotation
 }
 
 // Change arm state from local input

@@ -35,9 +35,10 @@ for (var i = 0; i < ds_list_size(broadcast_projectiles); i ++) {
 for (var i = 0; i < ds_list_size(broadcast_projectile_hits); i ++) {
 	var _projectile_id = broadcast_projectile_hits[|i][0]
 	var _hit_player = broadcast_projectile_hits[|i][1]
+	var _head_or_trunk = broadcast_projectile_hits[|i][2] // whether head was hit (or trunk)
 	
 	if (instance_exists(_hit_player))	
-		broadcast_packet(packgen_projectile_hit(_projectile_id, _hit_player.playid))
+		broadcast_packet(packgen_projectile_hit(_projectile_id, _hit_player.playid, _head_or_trunk))
 	else broadcast_packet(packgen_projectile_hit(_projectile_id))
 }
 

@@ -8,12 +8,12 @@ if (instance_exists(camera)) {
 		
 		// find point
 		var _center_dir = point_direction(
-			_pip.collision.x, _pip.collision.y,
+			_pip.col_trunk.x, _pip.col_trunk.y,
 			camera.x, camera.y
 		)
-		var _x = _pip.collision.x						// choose a point more towards center of camera for larger margin whether pip is in sight
+		var _x = _pip.col_trunk.x						// choose a point more towards center of camera for larger margin whether pip is in sight
 			+ lengthdir_x(20, _center_dir)
-		var _y = _pip.collision.y
+		var _y = _pip.col_trunk.y
 			+ lengthdir_y(20, _center_dir)
 		
 		// check if point is in sight
@@ -49,8 +49,8 @@ if (instance_exists(camera)) {
 			draw_set_halign(fa_center)
 		
 			draw_text(										// draw name
-				camera.gui_x(_pip.collision.x),				// convert coords of pip to GUI coords
-				camera.gui_y(_pip.collision.y) - 70,
+				camera.gui_x(_pip.col_trunk.x),				// convert coords of pip to GUI coords
+				camera.gui_y(_pip.col_trunk.y) - 70,
 				_pip.player.name
 			)		
 		
@@ -66,8 +66,8 @@ if (instance_exists(camera)) {
 			
 			var _hp = _pip.player.hp						// get hp
 			
-			var _x = camera.gui_x(_pip.collision.x)			// get position
-			var _y = camera.gui_y(_pip.collision.y)
+			var _x = camera.gui_x(_pip.col_trunk.x)			// get position
+			var _y = camera.gui_y(_pip.col_trunk.y)
 			
 			var _w = 64, _h = 2, _y_off = 52				// dimensions of hp bar
 			var _w_hp = _hp / 100 * _w						// width of hp part of hp bar

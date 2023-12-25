@@ -2,11 +2,11 @@
 if (target_select == -1) {
 	var _player = instance_find(obj_player_local, 0)			// find first local player
 	if (instance_exists(_player.pip))
-		target = _player.pip.collision							// set target
+		target = _player.pip.col_head							// set target to head of player
 } else {
 	var _player = instance_find(obj_player, target_select)		// find player with id selector
 	if (instance_exists(_player.pip))
-		target = _player.pip.collision							// set target
+		target = _player.pip.col_head							// set target to head of player
 }
 
 // Selector

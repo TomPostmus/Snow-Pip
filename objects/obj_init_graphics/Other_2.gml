@@ -7,9 +7,9 @@ window_set_caption("Client " + string(MultiClientGetID()))
 if (!full_screen) {
 	var window_w = window_get_width()
 	var display_w = display_get_width()
-	//if (Number_Of_Clients == 2) {  // if there are 2 clients
+	//if (Number_Of_Clients == 2) {			// if there are 2 clients
 		if (MultiClientGetID() == 0) {
-			window_set_position(0, 500)
+			window_set_position(200, 200)	// place first window somewhat centered
 		} else if (MultiClientGetID() == 1) {
 			window_set_position(display_w / 2, 500)
 		}
