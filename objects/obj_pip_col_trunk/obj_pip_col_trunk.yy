@@ -2,7 +2,11 @@
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
   "name": "obj_pip_col_trunk",
-  "eventList": [],
+  "eventList": [
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":{"name":"obj_wall_parent","path":"objects/obj_wall_parent/obj_wall_parent.yy",},"eventNum":0,"eventType":4,"isDnD":false,},
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":{"name":"obj_wallow_parent","path":"objects/obj_wallow_parent/obj_wallow_parent.yy",},"eventNum":0,"eventType":4,"isDnD":false,},
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
+  ],
   "managed": true,
   "overriddenProperties": [],
   "parent": {
@@ -14,7 +18,7 @@
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
   "physicsFriction": 0.2,
-  "physicsGroup": 1,
+  "physicsGroup": 2,
   "physicsKinematic": false,
   "physicsLinearDamping": 12.0,
   "physicsObject": true,
@@ -39,5 +43,5 @@
     "path": "sprites/spr_pip_col_trunk/spr_pip_col_trunk.yy",
   },
   "spriteMaskId": null,
-  "visible": true,
+  "visible": false,
 }

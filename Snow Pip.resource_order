@@ -11,6 +11,7 @@
     {"name":"pip_arm","order":5,"path":"folders/Sprites/pip/pip_arm.yy",},
     {"name":"snowball","order":17,"path":"folders/Sprites/snowball.yy",},
     {"name":"tex","order":30,"path":"folders/Sprites/tex.yy",},
+    {"name":"trees","order":31,"path":"folders/Sprites/trees.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"spr_wall_simple","order":4,"path":"sprites/spr_wall_simple/spr_wall_simple.yy",},

@@ -23,6 +23,7 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"pip_arm","folderPath":"folders/Sprites/pip/pip_arm.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"snowball","folderPath":"folders/Sprites/snowball.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"tex","folderPath":"folders/Sprites/tex.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"trees","folderPath":"folders/Sprites/trees.yy",},
   ],
   "IncludedFiles": [],
   "isEcma": false,
@@ -52,6 +53,7 @@
     {"id":{"name":"spr_furniture","path":"sprites/spr_furniture/spr_furniture.yy",},},
     {"id":{"name":"obj_client","path":"objects/obj_client/obj_client.yy",},},
     {"id":{"name":"obj_wallow_collision","path":"objects/obj_wallow_collision/obj_wallow_collision.yy",},},
+    {"id":{"name":"spr_pine_branch","path":"sprites/spr_pine_branch/spr_pine_branch.yy",},},
     {"id":{"name":"spr_tex_blocks","path":"sprites/spr_tex_blocks/spr_tex_blocks.yy",},},
     {"id":{"name":"init_networking","path":"rooms/init_networking/init_networking.yy",},},
     {"id":{"name":"obj_wall_collision","path":"objects/obj_wall_collision/obj_wall_collision.yy",},},
@@ -97,10 +99,10 @@
   ],
   "RoomOrderNodes": [
     {"roomId":{"name":"init","path":"rooms/init/init.yy",},},
+    {"roomId":{"name":"hoenderloo","path":"rooms/hoenderloo/hoenderloo.yy",},},
     {"roomId":{"name":"init_networking","path":"rooms/init_networking/init_networking.yy",},},
     {"roomId":{"name":"lobby","path":"rooms/lobby/lobby.yy",},},
     {"roomId":{"name":"stage_maze","path":"rooms/stage_maze/stage_maze.yy",},},
-    {"roomId":{"name":"hoenderloo","path":"rooms/hoenderloo/hoenderloo.yy",},},
   ],
   "templateType": null,
   "TextureGroups": [
