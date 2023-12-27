@@ -41,6 +41,7 @@
     {"name":"spr_snow","order":24,"path":"sprites/spr_snow/spr_snow.yy",},
     {"name":"obj_pip_col_trunk","order":4,"path":"objects/obj_pip_col_trunk/obj_pip_col_trunk.yy",},
     {"name":"obj_snowball_pulverise","order":7,"path":"objects/obj_snowball_pulverise/obj_snowball_pulverise.yy",},
+    {"name":"spr_pine_branch_long","order":1,"path":"sprites/spr_pine_branch_long/spr_pine_branch_long.yy",},
     {"name":"spr_pip_arm_brace","order":1,"path":"sprites/spr_pip_arm_brace/spr_pip_arm_brace.yy",},
     {"name":"spr_ground","order":20,"path":"sprites/spr_ground/spr_ground.yy",},
     {"name":"obj_hud","order":2,"path":"objects/obj_hud/obj_hud.yy",},

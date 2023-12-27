@@ -63,6 +63,7 @@
     {"id":{"name":"spr_snow","path":"sprites/spr_snow/spr_snow.yy",},},
     {"id":{"name":"obj_pip_col_trunk","path":"objects/obj_pip_col_trunk/obj_pip_col_trunk.yy",},},
     {"id":{"name":"obj_snowball_pulverise","path":"objects/obj_snowball_pulverise/obj_snowball_pulverise.yy",},},
+    {"id":{"name":"spr_pine_branch_long","path":"sprites/spr_pine_branch_long/spr_pine_branch_long.yy",},},
     {"id":{"name":"spr_pip_arm_brace","path":"sprites/spr_pip_arm_brace/spr_pip_arm_brace.yy",},},
     {"id":{"name":"spr_ground","path":"sprites/spr_ground/spr_ground.yy",},},
     {"id":{"name":"obj_hud","path":"objects/obj_hud/obj_hud.yy",},},
