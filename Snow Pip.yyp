@@ -99,8 +99,8 @@
     {"id":{"name":"stage_maze","path":"rooms/stage_maze/stage_maze.yy",},},
   ],
   "RoomOrderNodes": [
-    {"roomId":{"name":"init","path":"rooms/init/init.yy",},},
     {"roomId":{"name":"hoenderloo","path":"rooms/hoenderloo/hoenderloo.yy",},},
+    {"roomId":{"name":"init","path":"rooms/init/init.yy",},},
     {"roomId":{"name":"init_networking","path":"rooms/init_networking/init_networking.yy",},},
     {"roomId":{"name":"lobby","path":"rooms/lobby/lobby.yy",},},
     {"roomId":{"name":"stage_maze","path":"rooms/stage_maze/stage_maze.yy",},},
